@@ -7,6 +7,7 @@ const app = express() // Create an express app instance, called: app
 // The big node modules we are going to be using for our app
 const bodyParser = require('body-parser')
 const request = require('request')
+const path = require('path') // Used to set the location of the front end files
 
 // Configure the app to parse the url-encoded values in post requests
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -16,15 +17,25 @@ app.use(bodyParser.json())
 
 // There are many configuartions that can be set for body-parser
 
+// Set the path to serve the static frontend files
+app.use(express.static(path.join(__dirname, 'public/dist')));
+
 // Declare the port to run the app on
 const port = 3000
 
 // Declare endpoints (also known as routes) ---------------------------------
 
+// Open the static index file first
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/dist/index.html'));
+});
+
+/*
 // Default route. Visiting the localhost:3000 hit this end point
 app.get('/', (req, res) => {
   res.send('Yo yo whattup dawg')
 })
+*/
 
 // This endpoint displays a message in the console 
 app.get('/evenDeeper', (req, res) => {

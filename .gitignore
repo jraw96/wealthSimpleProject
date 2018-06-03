@@ -3,3 +3,6 @@ node_modules
 
 #Ignore the node_modules in the front end
 public/node_modules
+
+#Ignore the private folder, containing the oauth client secret
+private/private.js

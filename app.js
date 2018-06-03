@@ -10,6 +10,8 @@ const path = require('path') // Used to set the location of the front end files
 
 // Imported files within the root directory
 const clientAPI = require('./routes/api.js')
+const authenticationAPI = require('./routes/authentication.js')
+const privateData = require('./private/private.js')
 
 // Declare the port to run the app on
 const port = 3000
@@ -25,8 +27,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Set where the endpoints are for the API. They are defined there. 
+// Set where the endpoints are for the frontend API. They are defined there. 
 app.use('/api', clientAPI)
+
+// Set the endpoint for authentication via OpenID Connect
+app.use('/callback', authenticationAPI)
 
 // Set the path to serve the static frontend files
 app.use(express.static(path.join(__dirname, 'public/dist')));

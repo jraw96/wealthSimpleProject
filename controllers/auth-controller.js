@@ -1,15 +1,10 @@
-// controllers/controller.js
+// controllers/auth-controller.js
 //
 // Backend Controller Functions
 const request = require('request')
+const privateData = require('../private/private.js')
 var ctr = {}
 
-ctr.evenDeeper = function(req, res){
-    console.log("Sanity check confirmed!")
-    var response = {}
-    response.yolo = "yoyoyoyoyoy"
-    res.send(response)
-}
 
 ctr.callback = function(req,res){
 
@@ -22,7 +17,7 @@ ctr.callback = function(req,res){
     // Oauth client details with authorization code extracted from the req object. 
     var options = { 
       client_id: '2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833',
-      client_secret: 'f1a1da160f46b333f927531b5b6a5fcb36de4fc9119809a483c71998af290789',
+      client_secret: privateData.secret, //'f1a1da160f46b333f927531b5b6a5fcb36de4fc9119809a483c71998af290789',
       grant_type: 'authorization_code',
       redirect_uri: 'http://localhost:3000/callback',
       code: req.query.code 

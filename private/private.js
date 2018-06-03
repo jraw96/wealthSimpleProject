@@ -1,3 +1,3 @@
 var privateData = {}
 
-privateData.secret = ""
+privateData.secret = "test"

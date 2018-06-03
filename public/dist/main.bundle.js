@@ -155,11 +155,14 @@ var platform_browser_1 = __webpack_require__("../../../platform-browser/esm5/pla
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var forms_1 = __webpack_require__("../../../forms/esm5/forms.js");
 var http_1 = __webpack_require__("../../../http/esm5/http.js");
+var http_2 = __webpack_require__("../../../common/esm5/http.js");
 var angular_1 = __webpack_require__("../../../../@clr/angular/esm5/clr-angular.js");
 var app_component_1 = __webpack_require__("../../../../../src/app/app.component.ts");
 var app_routing_1 = __webpack_require__("../../../../../src/app/app.routing.ts");
 var home_component_1 = __webpack_require__("../../../../../src/app/home/home.component.ts");
 var about_component_1 = __webpack_require__("../../../../../src/app/about/about.component.ts");
+// Services
+var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -175,10 +178,11 @@ var AppModule = /** @class */ (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
+                http_2.HttpClientModule,
                 angular_1.ClarityModule,
                 app_routing_1.ROUTING
             ],
-            providers: [],
+            providers: [access_token_service_1.AccessTokenService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -244,6 +248,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * Copyright (c) 2016 VMware, Inc. All Rights Reserved.
@@ -251,14 +258,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+// Services 
+var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
+    function HomeComponent(accessToken) {
+        this.accessToken = accessToken;
     }
+    HomeComponent.prototype.ngOnInit = function () {
+        console.log("We initting");
+        this.accessToken.getAccessToken().subscribe(function (data) {
+            console.log("I got this back: " + JSON.stringify(data));
+        }, function (error) {
+            console.log("Yo dawg, error: " + JSON.stringify(error));
+        });
+    };
     HomeComponent = __decorate([
         core_1.Component({
             styles: [__webpack_require__("../../../../../src/app/home/home.component.scss")],
             template: __webpack_require__("../../../../../src/app/home/home.component.html"),
-        })
+        }),
+        __metadata("design:paramtypes", [access_token_service_1.AccessTokenService])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -278,6 +297,42 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__("../../../../../src/app/app.component.ts"));
 __export(__webpack_require__("../../../../../src/app/app.module.ts"));
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/access-token.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var AccessTokenService = /** @class */ (function () {
+    function AccessTokenService(http) {
+        this.http = http;
+    }
+    // Request the access token using the backend API
+    AccessTokenService.prototype.getAccessToken = function () {
+        return this.http.get('http://localhost:3000/evenDeeper');
+    };
+    AccessTokenService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.HttpClient])
+    ], AccessTokenService);
+    return AccessTokenService;
+}());
+exports.AccessTokenService = AccessTokenService;
 
 
 /***/ }),

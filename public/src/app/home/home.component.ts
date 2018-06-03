@@ -3,12 +3,27 @@
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
-import { Component } from "@angular/core";
+import { Component, OnInit} from "@angular/core";
+
+// Services 
+import { AccessTokenService } from "../services/access-token.service"
+import { access } from "fs";
 
 @Component({
     styleUrls: ['./home.component.scss'],
     templateUrl: './home.component.html',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
+    constructor(private accessToken: AccessTokenService){}
+
+    ngOnInit() {
+        console.log("We initting")
+
+        this.accessToken.getAccessToken().subscribe(data =>{
+            console.log("I got this back: " + JSON.stringify(data))
+        }, error =>{
+            console.log("Yo dawg, error: " + JSON.stringify(error))
+        })
+      }
 }

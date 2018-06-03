@@ -15,7 +15,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Configure the app to parse bodies in POST request that are in pure json
 app.use(bodyParser.json())
 
-// There are many configuartions that can be set for body-parser
+
+// Enable CORS to allow access for Wealth Simple
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+
 
 // Set the path to serve the static frontend files
 app.use(express.static(path.join(__dirname, 'public/dist')));
@@ -25,10 +33,14 @@ const port = 3000
 
 // Declare endpoints (also known as routes) ---------------------------------
 
-// Open the static index file first
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/dist/index.html'));
-});
+// This endpoint displays a message in the console 
+app.get('/evenDeeper', (req, res) => {
+  console.log("Even deeper has been hit")
+  var response = {}
+  response.yolo = "yoyoyoyoyoy"
+  res.send(response)
+})
+
 
 /*
 // Default route. Visiting the localhost:3000 hit this end point
@@ -37,12 +49,7 @@ app.get('/', (req, res) => {
 })
 */
 
-// This endpoint displays a message in the console 
-app.get('/evenDeeper', (req, res) => {
-    console.log("Even deeper has been hit")
-    var body = req.body
-    response.send(body)
-  })
+
 
 
   // This endpoint is hit by WealthSimple, after clicking "allow access"
@@ -92,6 +99,13 @@ app.get('/evenDeeper', (req, res) => {
     });
 
   })
+
+
+// Open the static index file first
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/dist/index.html'));
+});
+
 
 
 // Turn on the app -----------

@@ -5,4 +5,4 @@ node_modules
 public/node_modules
 
 #Ignore the private folder, containing the oauth client secret
-private/private.js
+private

@@ -324,7 +324,7 @@ var AccessTokenService = /** @class */ (function () {
     }
     // Request the access token using the backend API
     AccessTokenService.prototype.getAccessToken = function () {
-        return this.http.get('http://localhost:3000/evenDeeper');
+        return this.http.get('http://localhost:3000/api/evenDeeper');
     };
     AccessTokenService = __decorate([
         core_1.Injectable(),

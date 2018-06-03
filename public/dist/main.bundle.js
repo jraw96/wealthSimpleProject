@@ -215,7 +215,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\n  ~ This software is released under MIT license.\n  ~ The full license information can be found in LICENSE in the root directory of this project.\n  -->\nYo yo yo whattup its your boy Big Money\n"
+module.exports = "<!--\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\n  ~ This software is released under MIT license.\n  ~ The full license information can be found in LICENSE in the root directory of this project.\n  -->\nYo yo yo whattup its your boy Big Money\n\n<br>\n<p>Welcome! Please <a href=\"/login\">log in</a>.</p>\n"
 
 /***/ }),
 
@@ -266,7 +266,8 @@ var HomeComponent = /** @class */ (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log("We initting");
-        this.accessToken.getAccessToken().subscribe(function (data) {
+        // Hit the first endpoint for authenticating
+        this.accessToken.authenticate().subscribe(function (data) {
             console.log("I got this back: " + JSON.stringify(data));
         }, function (error) {
             console.log("Yo dawg, error: " + JSON.stringify(error));
@@ -323,8 +324,8 @@ var AccessTokenService = /** @class */ (function () {
         this.http = http;
     }
     // Request the access token using the backend API
-    AccessTokenService.prototype.getAccessToken = function () {
-        return this.http.get('http://localhost:3000/api/evenDeeper');
+    AccessTokenService.prototype.authenticate = function () {
+        return this.http.get('http://localhost:3000/login');
     };
     AccessTokenService = __decorate([
         core_1.Injectable(),

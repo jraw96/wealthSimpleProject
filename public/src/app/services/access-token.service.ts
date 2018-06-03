@@ -7,9 +7,8 @@ export class AccessTokenService {
   constructor(private http: HttpClient) { }
 
   // Request the access token using the backend API
-  getAccessToken(){
-    return this.http.get('http://localhost:3000/api/evenDeeper')
-
+  authenticate(){
+    return this.http.get('http://localhost:3000/login')
   }
 
 }

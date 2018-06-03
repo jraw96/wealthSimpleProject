@@ -20,10 +20,13 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         console.log("We initting")
 
-        this.accessToken.getAccessToken().subscribe(data =>{
+
+        // Hit the first endpoint for authenticating
+        this.accessToken.authenticate().subscribe(data =>{
             console.log("I got this back: " + JSON.stringify(data))
         }, error =>{
             console.log("Yo dawg, error: " + JSON.stringify(error))
         })
+        
       }
 }

@@ -10,9 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "connect-ensure-login": "^0.1.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "morgan": "^1.9.0",
+    "passport": "^0.2.2",
+    "passport-openidconnect": "^0.0.1",
     "path": "^0.12.7",
     "request": "^2.87.0"
   }

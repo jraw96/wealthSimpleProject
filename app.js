@@ -2,6 +2,8 @@
 // Create the express.js app
 const express = require('express') // Bring in express
 
+const app = express() // Create an express app instance, called: app 
+
 // =============
 // Passport.js OpenID Connect Authentication Strategy
 // =============
@@ -17,14 +19,6 @@ passport.use(new Strategy({
   tokenURL: 'https://api.sandbox.wealthsimple.com/v1/oauth/token',
   callbackURL: 'http://localhost:3000/callback',
   scope: 'read'
-},
-function(token, tokenSecret, profile, cb) {
-  // In this example, the user's Twitter profile is supplied as the user
-  // record.  In a production-quality application, the Twitter profile should
-  // be associated with a user record in the application's database, which
-  // allows for account linking and authentication with other identity
-  // providers.
-  return cb(null, profile);
 }));
 
 
@@ -38,10 +32,6 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
-
-
-const app = express() // Create an express app instance, called: app 
 
 // Node modules used in our app
 const bodyParser = require('body-parser')
@@ -87,31 +77,14 @@ app.get('/callback',
   passport.authenticate('openidconnect', { failureRedirect: '/login' }),
   function(req, res) {
 
-  
-  console.log("YOKO ONO?????")
     console.log("test: " + JSON.stringify(req.user))
-
 
     res.redirect('/');
   });
 
-  /*
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
-  */
-
-// ============
-// ============
-
-
 // Set where the endpoints are for the frontend API. They are defined there. 
 app.use('/api', clientAPI)
 
-// Set the endpoint for authentication via OpenID Connect
-//app.use('/callback', authenticationAPI)
 
 // Set the path to serve the static frontend files
 app.use(express.static(path.join(__dirname, 'public/dist')));

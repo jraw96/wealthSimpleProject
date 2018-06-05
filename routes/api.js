@@ -2,6 +2,8 @@ var express = require('express'); // bring in express
 var router = express.Router(); // brings in the express router
 const ctr = require('../controllers/api-controller.js')
 
+
+// This function needs to be included in every API request, to make sure the user is always authenticated. 
 function checkAuthentication(req,res,next){
     if(req.isAuthenticated()){
         //req.isAuthenticated() will return true if user is logged in

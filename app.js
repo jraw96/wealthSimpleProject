@@ -1,37 +1,7 @@
 
 // Create the express.js app
 const express = require('express') // Bring in express
-
 const app = express() // Create an express app instance, called: app 
-
-// =============
-// Passport.js OpenID Connect Authentication Strategy
-// =============
-
-var passport = require('passport');
-var Strategy = require('passport-openidconnect').Strategy;
-
-// Define the OpenID Connect Strategy
-passport.use(new Strategy({
-  clientID: '2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833',
-  clientSecret: 'f1a1da160f46b333f927531b5b6a5fcb36de4fc9119809a483c71998af290789',
-  authorizationURL: 'https://staging.wealthsimple.com/oauth/authorize',
-  tokenURL: 'https://api.sandbox.wealthsimple.com/v1/oauth/token',
-  callbackURL: 'http://localhost:3000/callback',
-  scope: 'read'
-}));
-
-
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session. 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
 
 // Node modules used in our app
 const bodyParser = require('body-parser')
@@ -40,11 +10,7 @@ const path = require('path') // Used to set the location of the front end files
 
 // Imported files within the root directory
 const clientAPI = require('./routes/api.js')
-const authenticationAPI = require('./routes/authentication.js')
 const privateData = require('./private/private.js')
-
-// Declare the port to run the app on
-const port = 3000
 
 // Enable CORS to allow access for Wealth Simple
 app.use(function(req, res, next) {
@@ -59,32 +25,54 @@ app.use(bodyParser.json())
 app.use(require('express-session')({ secret: 'wealthsimple is cool', resave: true, saveUninitialized: true }));
 
 
-
-
 // =============
-// Passport initializing and routing
+// Passport.js OpenID Connect Authentication Strategy
 // =============
 
+var passport = require('passport');
+var Strategy = require('passport-openidconnect').Strategy;
 
-// Turn on passport
+// Define the OpenID Connect Strategy
+passport.use(new Strategy({
+  clientID: privateData.ID,
+  clientSecret: privateData.secret,
+  authorizationURL: privateData.authorizationURL,
+  tokenURL: privateData.tokenURL,
+  callbackURL: privateData.callbackURL,
+  scope: privateData.scope
+}));
+
+
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session. 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+// Initialize passport to track sessions
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/login',
-  passport.authenticate('openidconnect'));
+// Passport/authetnication end points. 
+app.get('/login', passport.authenticate('openidconnect'));
+app.get('/callback', passport.authenticate('openidconnect', { failureRedirect: '/login' }),function(req, res) {
 
-app.get('/callback', 
-  passport.authenticate('openidconnect', { failureRedirect: '/login' }),
-  function(req, res) {
-
-    console.log("test: " + JSON.stringify(req.user))
-
+    // Redirect to the home page upon authentication. Eventually this will redirect to wherever the user in the front end was. 
     res.redirect('/');
-  });
+});
 
-// Set where the endpoints are for the frontend API. They are defined there. 
+// =============
+// End of Passport.js authenticetion
+// ============
+
+
+// All other routing is done here. 
 app.use('/api', clientAPI)
-
 
 // Set the path to serve the static frontend files
 app.use(express.static(path.join(__dirname, 'public/dist')));
@@ -95,5 +83,7 @@ app.get('*', (req, res) => {
 });
 
 // Turn on the app -----------
+// Declare the port to run the app on
+const port = process.env.PORT || 3000
 app.listen(port)
 console.log("Running on port: " + port)

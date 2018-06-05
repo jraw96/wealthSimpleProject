@@ -56,18 +56,20 @@ const privateData = require('./private/private.js')
 // Declare the port to run the app on
 const port = 3000
 
-// Configure the app to parse the url-encoded values and json post requests
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(require('express-session')({ secret: 'wealthsimple is cool', resave: true, saveUninitialized: true }));
-
-
 // Enable CORS to allow access for Wealth Simple
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+// Configure the app to parse the url-encoded values and json post requests
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(require('express-session')({ secret: 'wealthsimple is cool', resave: true, saveUninitialized: true }));
+
+
+
 
 // =============
 // Passport initializing and routing
@@ -85,7 +87,10 @@ app.get('/callback',
   passport.authenticate('openidconnect', { failureRedirect: '/login' }),
   function(req, res) {
 
+  
   console.log("YOKO ONO?????")
+    console.log("test: " + JSON.stringify(req.user))
+
 
     res.redirect('/');
   });

@@ -1,5 +1,6 @@
 # Ignore the node_modules in the backend
-node_modules
+# The passport-openidconnect node module was edited, so this needs to be included now lol. 
+# node_modules
 
 #Ignore the node_modules in the front end
 public/node_modules

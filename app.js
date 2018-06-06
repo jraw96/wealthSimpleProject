@@ -1,8 +1,6 @@
-
 // Create the express.js app
 const express = require('express') // Bring in express
 const app = express() // Create an express app instance, called: app 
-
 
 // Node modules used in our app
 const bodyParser = require('body-parser')
@@ -12,9 +10,6 @@ const path = require('path') // Used to set the location of the front end files
 // Imported files within the root directory
 const clientAPI = require('./routes/api.js')
 const privateData = require('./private/private.js')
-
-
-
 
 // Configure the app to parse the url-encoded values and json post requests
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -26,12 +21,7 @@ app.use('*', function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  console.log("Added cors headers!")
-  console.log("Here is the headers: " + JSON.stringify(res.header))
-  console.log("Gettingt allow origin: " + res.getHeaderNames())
-  console.log("GEttin stuffd: " + res.getHeader("Access-Control-Allow-Origin"))
-    next();
+  next();
 })
 
 
@@ -70,12 +60,9 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
 // Initialize passport to track sessions
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 
 // Passport/authetnication end points. 
@@ -98,14 +85,13 @@ app.use('/api', clientAPI)
 app.use(express.static(path.join(__dirname, 'public/dist')));
 
 
-// Open the static index file first
+// Used to connect the dist routes with the express routes. 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/dist/index.html'));
 });
 
 
 // Turn on the app -----------
-// Declare the port to run the app on
 const port = process.env.PORT || 3000
 app.listen(port)
 console.log("Running on port: " + port)

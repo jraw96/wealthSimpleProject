@@ -80,7 +80,7 @@ exports.AboutComponent = AboutComponent;
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<clr-main-container>\r\n  <clr-header>\r\n    <div class=\"branding\">\r\n      <a href=\"#\" class=\"nav-link\">\r\n        <span class=\"clr-icon clr-clarity-logo\"></span>\r\n        <span class=\"title\">Clarity</span>\r\n      </a>\r\n    </div>\r\n      <div class=\"header-nav\" [clr-nav-level]=\"1\">\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\"><span class=\"nav-text\">Home</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/about']\" routerLinkActive=\"active\"><span class=\"nav-text\">About</span></a>\r\n      </div>\r\n    <div class=\"header-actions\">\r\n    </div>\r\n  </clr-header>\r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</clr-main-container>\r\n"
+module.exports = "<clr-main-container>\r\n\r\n  <div *ngIf=\"!loading\">\r\n\r\n  <clr-header>\r\n    <div class=\"branding\">\r\n      <a href=\"/home\" class=\"nav-link\">\r\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\r\n        <span><img style=\"width: 30%; \" src=\"../images/wealthsimple-circle.svg\"/></span> \r\n      </a>\r\n    </div>\r\n      <div class=\"header-nav\" [clr-nav-level]=\"1\">\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\" style=\"margin-left: -60%\"><span class=\"nav-text\">Home</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/about']\" routerLinkActive=\"active\"><span class=\"nav-text\">About</span></a>\r\n      </div>\r\n    <div class=\"header-actions\">\r\n    </div>\r\n  </clr-header>\r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\r\n    <img src=\"../../images/authing.gif\"/>\r\n</div>\r\n\r\n\r\n</clr-main-container>\r\n"
 
 /***/ }),
 
@@ -119,17 +119,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(router) {
+    function AppComponent(router, accessToken) {
         this.router = router;
+        this.accessToken = accessToken;
+        this.loading = true;
     }
+    // Check to see if the browser session has a valid, authenticated session in the server
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.accessToken.authenticate().subscribe(function (data) {
+            console.log("I got this back: " + JSON.stringify(data));
+            // Go to the Wealth Simple auth portal
+            if (data["authorizeURL"]) {
+                window.location.href = data["authorizeURL"];
+            }
+            else {
+                console.log("All logged in!");
+                _this.loading = false;
+            }
+        }, function (error) {
+            console.log("Yo dawg, error: " + JSON.stringify(error));
+        });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [router_1.Router])
+        __metadata("design:paramtypes", [router_1.Router, access_token_service_1.AccessTokenService])
     ], AppComponent);
     return AppComponent;
 }());
@@ -215,7 +235,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div *ngIf=\"!loading\">\r\n  Yo yo yo whattup its your boy Big Money\r\n\r\n  <br>\r\n  <p>Welcome! Please <a href=\"/login\">log in</a>.</p>\r\n  <br> \r\n  <p>Test to go even deeper: <a href=\"/api/evenDeeper\">deeeeeeeeeeeeeep</a>.</p>\r\n\r\n</div>\r\n<div *ngIf=\"loading\">\r\n  <!-- I got this sick gif here: http://backgroundcheckall.com/loading-gif-transparent-background-6/ -->\r\n  <img src=\"../../images/authing.gif\"/>\r\n</div>"
+module.exports = "Congrats, you are successfully authenticated!"
 
 /***/ }),
 
@@ -263,25 +283,9 @@ var access_token_service_1 = __webpack_require__("../../../../../src/app/service
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(accessToken) {
         this.accessToken = accessToken;
-        this.loading = true;
     }
     HomeComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        console.log("We initting");
-        // Hit the first endpoint for authenticating
-        this.accessToken.authenticate().subscribe(function (data) {
-            console.log("I got this back: " + JSON.stringify(data));
-            // Go to the Wealth Simple auth portal
-            if (data["authorizeURL"]) {
-                window.location.href = data["authorizeURL"];
-            }
-            else {
-                console.log("All logged in!");
-                _this.loading = false;
-            }
-        }, function (error) {
-            console.log("Yo dawg, error: " + JSON.stringify(error));
-        });
+        console.log("We loaded to home");
     };
     HomeComponent = __decorate([
         core_1.Component({

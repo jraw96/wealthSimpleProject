@@ -8,7 +8,8 @@ export class AccessTokenService {
 
   // Request the access token using the backend API
   authenticate(){
-    return this.http.get('http://localhost:3000/login')
+    return this.http.get('http://localhost:3000/api/evenDeeper')
+    
   }
 
 }

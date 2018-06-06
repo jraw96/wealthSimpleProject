@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
 
     constructor(private accessToken: AccessTokenService){}
 
+    loading: boolean = true;
+
+    
+
     ngOnInit() {
         console.log("We initting")
 
@@ -24,6 +28,15 @@ export class HomeComponent implements OnInit {
         // Hit the first endpoint for authenticating
         this.accessToken.authenticate().subscribe(data =>{
             console.log("I got this back: " + JSON.stringify(data))
+
+            // Go to the Wealth Simple auth portal
+            if(data["authorizeURL"]){
+                window.location.href = data["authorizeURL"]
+            }else{
+                console.log("All logged in!")
+                this.loading = false
+            }
+
         }, error =>{
             console.log("Yo dawg, error: " + JSON.stringify(error))
         })

@@ -215,7 +215,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--\r\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\r\n  ~ This software is released under MIT license.\r\n  ~ The full license information can be found in LICENSE in the root directory of this project.\r\n  -->\r\nYo yo yo whattup its your boy Big Money\r\n\r\n<br>\r\n<p>Welcome! Please <a href=\"/login\">log in</a>.</p>\r\n<br> \r\n<p>Test to go even deeper: <a href=\"/api/evenDeeper\">deeeeeeeeeeeeeep</a>.</p>"
+module.exports = "\r\n<div *ngIf=\"!loading\">\r\n  Yo yo yo whattup its your boy Big Money\r\n\r\n  <br>\r\n  <p>Welcome! Please <a href=\"/login\">log in</a>.</p>\r\n  <br> \r\n  <p>Test to go even deeper: <a href=\"/api/evenDeeper\">deeeeeeeeeeeeeep</a>.</p>\r\n\r\n</div>\r\n<div *ngIf=\"loading\">\r\n  <!-- I got this sick gif here: http://backgroundcheckall.com/loading-gif-transparent-background-6/ -->\r\n  <img src=\"../../images/authing.gif\"/>\r\n</div>"
 
 /***/ }),
 
@@ -263,12 +263,22 @@ var access_token_service_1 = __webpack_require__("../../../../../src/app/service
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(accessToken) {
         this.accessToken = accessToken;
+        this.loading = true;
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         console.log("We initting");
         // Hit the first endpoint for authenticating
         this.accessToken.authenticate().subscribe(function (data) {
             console.log("I got this back: " + JSON.stringify(data));
+            // Go to the Wealth Simple auth portal
+            if (data["authorizeURL"]) {
+                window.location.href = data["authorizeURL"];
+            }
+            else {
+                console.log("All logged in!");
+                _this.loading = false;
+            }
         }, function (error) {
             console.log("Yo dawg, error: " + JSON.stringify(error));
         });
@@ -325,7 +335,7 @@ var AccessTokenService = /** @class */ (function () {
     }
     // Request the access token using the backend API
     AccessTokenService.prototype.authenticate = function () {
-        return this.http.get('http://localhost:3000/login');
+        return this.http.get('http://localhost:3000/api/evenDeeper');
     };
     AccessTokenService = __decorate([
         core_1.Injectable(),

@@ -1,11 +1,14 @@
-<!--
-  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.
-  ~ This software is released under MIT license.
-  ~ The full license information can be found in LICENSE in the root directory of this project.
-  -->
-Yo yo yo whattup its your boy Big Money
 
-<br>
-<p>Welcome! Please <a href="/login">log in</a>.</p>
-<br> 
-<p>Test to go even deeper: <a href="/api/evenDeeper">deeeeeeeeeeeeeep</a>.</p>
+<div *ngIf="!loading">
+  Yo yo yo whattup its your boy Big Money
+
+  <br>
+  <p>Welcome! Please <a href="/login">log in</a>.</p>
+  <br> 
+  <p>Test to go even deeper: <a href="/api/evenDeeper">deeeeeeeeeeeeeep</a>.</p>
+
+</div>
+<div *ngIf="loading">
+  <!-- I got this sick gif here: http://backgroundcheckall.com/loading-gif-transparent-background-6/ -->
+  <img src="../../images/authing.gif"/>
+</div>

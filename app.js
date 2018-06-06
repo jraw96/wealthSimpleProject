@@ -3,6 +3,7 @@
 const express = require('express') // Bring in express
 const app = express() // Create an express app instance, called: app 
 
+
 // Node modules used in our app
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -12,17 +13,33 @@ const path = require('path') // Used to set the location of the front end files
 const clientAPI = require('./routes/api.js')
 const privateData = require('./private/private.js')
 
-// Enable CORS to allow access for Wealth Simple
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
+
 
 // Configure the app to parse the url-encoded values and json post requests
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(require('express-session')({ secret: 'wealthsimple is cool', resave: true, saveUninitialized: true }));
+
+// Enable CORS to allow access for Wealth Simple
+app.use('*', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  console.log("Added cors headers!")
+  console.log("Here is the headers: " + JSON.stringify(res.header))
+  console.log("Gettingt allow origin: " + res.getHeaderNames())
+  console.log("GEttin stuffd: " + res.getHeader("Access-Control-Allow-Origin"))
+    next();
+})
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 
 // =============
@@ -58,6 +75,9 @@ passport.deserializeUser(function(obj, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+
 // Passport/authetnication end points. 
 app.get('/login', passport.authenticate('openidconnect'));
 app.get('/callback', passport.authenticate('openidconnect', { failureRedirect: '/login' }),function(req, res) {
@@ -77,10 +97,12 @@ app.use('/api', clientAPI)
 // Set the path to serve the static frontend files
 app.use(express.static(path.join(__dirname, 'public/dist')));
 
+
 // Open the static index file first
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/dist/index.html'));
 });
+
 
 // Turn on the app -----------
 // Declare the port to run the app on

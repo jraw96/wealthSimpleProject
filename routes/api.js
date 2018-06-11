@@ -8,6 +8,16 @@ function checkAuthentication(req,res,next){
 
     // If the access token is legit, stay in session, keep calm and carry on. 
     if(req.isAuthenticated()){
+
+       // console.log("Here is token: " + JSON.stringify(req.user.params))
+
+        
+        req.userInfo = {
+            user : req.user.params["resource_owner_id"],
+            person : req.user.params["client_canonical_id"]
+        }
+        
+
         next();
 
     // If not, get a new auth code and request a new access token. 

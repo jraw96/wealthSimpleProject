@@ -6,6 +6,7 @@ const app = express() // Create an express app instance, called: app
 const bodyParser = require('body-parser')
 const request = require('request')
 const path = require('path') // Used to set the location of the front end files
+const url = require('url')
 
 // Imported files within the root directory
 const clientAPI = require('./routes/api.js')
@@ -70,7 +71,18 @@ app.get('/login', passport.authenticate('openidconnect'));
 app.get('/callback', passport.authenticate('openidconnect', { failureRedirect: '/login' }),function(req, res) {
 
     // Redirect to the home page upon authentication. Eventually this will redirect to wherever the user in the front end was. 
-    res.redirect('/');
+    console.log("Successfully logged in!" + JSON.stringify(req.userInfo))
+   // res.redirect('/');
+
+    res.redirect(url.format({
+      pathname:"/",
+        query: {
+          "user": req.user.params["resource_owner_id"],
+          "person": req.user.params["client_canonical_id"]
+        }
+    }));
+
+  
 });
 
 // =============

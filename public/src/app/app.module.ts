@@ -12,13 +12,23 @@ import { AboutComponent } from "./about/about.component";
 
 
 // Services
-import { AccessTokenService } from "./services/access-token.service"
+import { AccessTokenService } from "./services/access-token.service";
+import { FundComponent } from './fund/fund.component';
+import { RewardsComponent } from './rewards/rewards.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SignupComponent } from './signup/signup.component';
+import { WelcomeComponent } from './welcome/welcome.component'
 
 @NgModule({
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent
+        HomeComponent,
+        FundComponent,
+        RewardsComponent,
+        ProfileComponent,
+        SignupComponent,
+        WelcomeComponent
     ],
     imports: [
         BrowserAnimationsModule,

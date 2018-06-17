@@ -11,11 +11,16 @@ export class AppComponent implements OnInit {
     constructor(private router: Router, private accessToken: AccessTokenService) { }
 
     loading: boolean = false//true;
+    loggedIn: boolean = false
 
     // Check to see if the browser session has a valid, authenticated session in the server
     ngOnInit(){
 
-        // Uncomment this:
+        
+    }
+
+    authenticate(){
+         // Uncomment this:
         /*
          this.accessToken.authenticate().subscribe(data =>{
             console.log("I got this back: " + JSON.stringify(data))
@@ -32,7 +37,6 @@ export class AppComponent implements OnInit {
             console.log("Yo dawg, error: " + JSON.stringify(error))
         })
         */
-        
     }
   
         

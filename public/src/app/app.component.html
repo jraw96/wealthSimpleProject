@@ -4,27 +4,69 @@
 
   <clr-header>
     <div class="branding">
-      <a href="/home" class="nav-link">
+      <a href="/" class="nav-link">
        <!-- <span class="clr-icon clr-clarity-logo"></span> -->
         <span><img style="width: 30%; " src="../images/wealthsimple-circle.svg"/></span> 
       </a>
     </div>
-      <div class="header-nav" [clr-nav-level]="1">
+
+
+      <!-- Authenticated nav bar -->
+      <div *ngIf="loggedIn" class="header-nav" [clr-nav-level]="1">
+
+          <!-- Left floating tabs -->
           <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="active" style="margin-left: -60%"><span class="nav-text">Home</span></a>
-          <a class="nav-link" href="#" [routerLink]="['/about']" routerLinkActive="active"><span class="nav-text">About</span></a>
+
+        
+          
       </div>
+
+      <!-- Unauthetnicated nav bar 
+      <div *ngIf="!loggedIn" class="header-nav" [clr-nav-level]="1">
+
+          <a class="nav-link" href="#" [routerLink]="['/signup']" routerLinkActive="active" style="margin-left: -100%"><span class="nav-text">Sign-up</span></a>
+          
+      </div>
+    -->
+
+<!--
     <div class="header-actions">
     </div>
+
+  -->
+  
   </clr-header>
+
+
   <div class="content-container">
     <div class="content-area">
-      <router-outlet></router-outlet>
+
+      <!-- If logged in, allow access to the app components -->
+      <div *ngIf="loggedIn">
+        <router-outlet></router-outlet>
+      </div>
+
+      <!-- If not logged in, show unauthorized welcome page -->
+      <div *ngIf="!loggedIn">
+        <p>Welcome to Jackpot by Wealthsimple</p>
+        <button class="btn btn-outline" (click)="authenticate()" >Login</button>
+
+        <button class="btn btn-primary">Signup</button>
+      </div>
+
+
+
+      
     </div>
   </div>
 </div>
+
 <div *ngIf="loading" style="margin-left: auto; margin-right: auto">
     <img src="../../images/authing.gif"/>
 </div>
+
+
+
 
 
 </clr-main-container>

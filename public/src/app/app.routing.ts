@@ -20,6 +20,7 @@ export const ROUTES: Routes = [
    // {path: '', redirectTo: 'welcome', pathMatch: 'full'},
     {path: '', component: WelcomeComponent},
     {path: 'home', component: HomeComponent},
+    {path: 'profile', component: ProfileComponent},
     {path: 'fund', component: FundComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'rewards', component: RewardsComponent},

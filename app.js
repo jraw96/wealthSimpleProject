@@ -75,13 +75,16 @@ app.get('/callback', passport.authenticate('openidconnect', { failureRedirect: '
    // res.redirect('/');
 
     res.redirect(url.format({
-      pathname:"/",
-        query: {
+      pathname:"/"     
+    }));
+
+    // Optional attach parameters to the url
+    /*
+    query: {
           "user": req.user.params["resource_owner_id"],
           "person": req.user.params["client_canonical_id"]
         }
-    }));
-
+    */
   
 });
 

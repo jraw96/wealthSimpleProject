@@ -9,9 +9,7 @@ function checkAuthentication(req,res,next){
     // If the access token is legit, stay in session, keep calm and carry on. 
     if(req.isAuthenticated()){
 
-       // console.log("Here is token: " + JSON.stringify(req.user.params))
-
-        
+       // console.log("Here is token: " + JSON.stringify(req.user.params))    
         req.userInfo = {
             user : req.user.params["resource_owner_id"],
             person : req.user.params["client_canonical_id"]
@@ -27,13 +25,16 @@ function checkAuthentication(req,res,next){
         var authorizeURL = "https://staging.wealthsimple.com/oauth/authorize?response_type=code&client_id=2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=read"
         var resObj = {}
         resObj.authorizeURL = authorizeURL
+        res.status(401) // Set an unauthorized status code
         res.send(resObj)
     }
 }
 
 // This endpoint displays a message in the console 
-router.get('/evenDeeper', checkAuthentication, ctr.evenDeeper)
+router.get('/sessionInfo', checkAuthentication, ctr.attachInfo)
 
+//router.get('/login', checkAuthentication, ctr.evenDeeper)
+router.get('/login', checkAuthentication, ctr.login)
 
 // Expose the api 
 module.exports = router

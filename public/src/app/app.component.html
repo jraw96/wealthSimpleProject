@@ -1,6 +1,5 @@
 <clr-main-container>
 
-  <div *ngIf="!loading">
 
   <clr-header>
     <div class="branding">
@@ -15,7 +14,12 @@
       <div *ngIf="loggedIn" class="header-nav" [clr-nav-level]="1">
 
           <!-- Left floating tabs -->
-          <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="active" style="margin-left: -60%"><span class="nav-text">Home</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="active"><span class="nav-text">Home</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/fund']" routerLinkActive="active" ><span class="nav-text">Fund</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/profile']" routerLinkActive="active" ><span class="nav-text">Profile</span></a>
+
+          <a class="nav-link" href="#" [routerLink]="['/rewards']" routerLinkActive="active"><span class="nav-text">Earn Rewards</span></a>
+          <a class="nav-link" style="margin-left: 1rem" routerLinkActive="active"><clr-icon shape="cog"></clr-icon></a>
 
         
           
@@ -48,8 +52,18 @@
 
       <!-- If not logged in, show unauthorized welcome page -->
       <div *ngIf="!loggedIn">
-        <p>Welcome to Jackpot by Wealthsimple</p>
+        <p>Welcome to Jackpot by Wealthsimple
+
+
+
+
+
+
+        </p>
         <button class="btn btn-outline" (click)="authenticate()" >Login</button>
+        <div *ngIf="loading" style="margin-left: auto; margin-right: auto">
+            <img style="width: 50px" src="../../images/authing.gif"/>
+        </div>
 
         <button class="btn btn-primary">Signup</button>
       </div>
@@ -59,11 +73,9 @@
       
     </div>
   </div>
-</div>
 
-<div *ngIf="loading" style="margin-left: auto; margin-right: auto">
-    <img src="../../images/authing.gif"/>
-</div>
+
+
 
 
 

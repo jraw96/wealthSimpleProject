@@ -17,7 +17,8 @@ import { FundComponent } from './fund/fund.component';
 import { RewardsComponent } from './rewards/rewards.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
-import { WelcomeComponent } from './welcome/welcome.component'
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ActivityComponent } from './activity/activity.component'
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { WelcomeComponent } from './welcome/welcome.component'
         RewardsComponent,
         ProfileComponent,
         SignupComponent,
-        WelcomeComponent
+        WelcomeComponent,
+        ActivityComponent
     ],
     imports: [
         BrowserAnimationsModule,

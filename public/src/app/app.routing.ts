@@ -14,12 +14,15 @@ import { SignupComponent } from './signup/signup.component'
 import { RewardsComponent } from './rewards/rewards.component'
 import { ProfileComponent } from './profile/profile.component'
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ActivityComponent } from './activity/activity.component'
 
 
 export const ROUTES: Routes = [
    // {path: '', redirectTo: 'welcome', pathMatch: 'full'},
     {path: '', component: WelcomeComponent},
     {path: 'home', component: HomeComponent},
+    {path: 'activity', component: ActivityComponent},
+    {path: 'learn', component: AboutComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'fund', component: FundComponent},
     {path: 'signup', component: SignupComponent},

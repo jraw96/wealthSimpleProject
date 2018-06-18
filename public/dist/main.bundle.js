@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /***/ "../../../../../src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--\n  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.\n  ~ This software is released under MIT license.\n  ~ The full license information can be found in LICENSE in the root directory of this project.\n  -->\nMore big money\n"
+module.exports = "\r\nLearn about stuff here\r\n"
 
 /***/ }),
 
@@ -47,6 +47,7 @@ module.exports = module.exports.toString();
 
 "use strict";
 
+// This is the "Learn" tab
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -54,13 +55,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
- * Copyright (c) 2016 VMware, Inc. All Rights Reserved.
- * This software is released under MIT license.
- * The full license information can be found in LICENSE in the root directory of this project.
- */
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var AboutComponent = /** @class */ (function () {
+var AboutComponent = (function () {
     function AboutComponent() {
         this.open = false;
     }
@@ -77,10 +73,71 @@ exports.AboutComponent = AboutComponent;
 
 /***/ }),
 
+/***/ "../../../../../src/app/activity/activity.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  activity works!\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/activity/activity.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/activity/activity.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var ActivityComponent = (function () {
+    function ActivityComponent() {
+    }
+    ActivityComponent.prototype.ngOnInit = function () {
+    };
+    ActivityComponent = __decorate([
+        core_1.Component({
+            selector: 'app-activity',
+            template: __webpack_require__("../../../../../src/app/activity/activity.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/activity/activity.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ActivityComponent);
+    return ActivityComponent;
+}());
+exports.ActivityComponent = ActivityComponent;
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<clr-main-container>\n\n\n  <clr-header>\n    <div class=\"branding\">\n      <a href=\"/\" class=\"nav-link\">\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\n        <span><img style=\"width: 30%; \" src=\"../images/wealthsimple-circle.svg\"/></span> \n      </a>\n    </div>\n\n\n      <!-- Authenticated nav bar -->\n      <div *ngIf=\"loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\n\n          <!-- Left floating tabs -->\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\"><span class=\"nav-text\">Home</span></a>\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/fund']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Fund</span></a>\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/profile']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Profile</span></a>\n\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/rewards']\" routerLinkActive=\"active\"><span class=\"nav-text\">Earn Rewards</span></a>\n          <a class=\"nav-link\" style=\"margin-left: 1rem\" routerLinkActive=\"active\"><clr-icon shape=\"cog\"></clr-icon></a>\n\n        \n          \n      </div>\n\n      <!-- Unauthetnicated nav bar \n      <div *ngIf=\"!loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\n\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/signup']\" routerLinkActive=\"active\" style=\"margin-left: -100%\"><span class=\"nav-text\">Sign-up</span></a>\n          \n      </div>\n    -->\n\n<!--\n    <div class=\"header-actions\">\n    </div>\n\n  -->\n  \n  </clr-header>\n\n\n  <div class=\"content-container\">\n    <div class=\"content-area\">\n\n      <!-- If logged in, allow access to the app components -->\n      <div *ngIf=\"loggedIn\">\n        <router-outlet></router-outlet>\n      </div>\n\n      <!-- If not logged in, show unauthorized welcome page -->\n      <div *ngIf=\"!loggedIn\">\n        <p>Welcome to Jackpot by Wealthsimple\n\n\n\n\n\n\n        </p>\n        <button class=\"btn btn-outline\" (click)=\"authenticate()\" >Login</button>\n        <div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\n            <img style=\"width: 50px\" src=\"../../images/authing.gif\"/>\n        </div>\n\n        <button class=\"btn btn-primary\">Signup</button>\n      </div>\n\n\n\n      \n    </div>\n  </div>\n\n\n\n\n\n\n\n\n</clr-main-container>\n"
+module.exports = "<clr-main-container>\r\n\r\n\r\n  <clr-header>\r\n    <div class=\"branding\">\r\n      <a href=\"/\" class=\"nav-link\">\r\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\r\n        <span><img style=\"width: 30%;\" src=\"../images/wealthsimple-circle.svg\"/></span> \r\n      </a>\r\n    </div>\r\n\r\n\r\n      <!-- Authenticated nav bar -->\r\n      <div *ngIf=\"loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <!-- Left floating tabs -->\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\" style=\"margin-left: -100px\"><span class=\"nav-text\">Savings</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/activity']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Activity</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/fund']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Funding</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/learn']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Learn</span></a>\r\n\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/profile']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Profile</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/rewards']\" routerLinkActive=\"active\"><span class=\"nav-text\">Earn Rewards</span></a>\r\n         <!--  <a class=\"nav-link\" style=\"margin-left: 1rem\" routerLinkActive=\"active\"><clr-icon shape=\"cog\"></clr-icon></a> -->\r\n      \r\n      </div>\r\n\r\n  </clr-header>\r\n\r\n\r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n\r\n      <!-- If logged in, allow access to the app components -->\r\n      <div *ngIf=\"loggedIn\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n\r\n      <!-- If not logged in, show unauthorized welcome page -->\r\n      <div *ngIf=\"!loggedIn\">\r\n        <p>Welcome to Jackpot by Wealthsimple\r\n\r\n\r\n        </p>\r\n        <button class=\"btn btn-outline\" (click)=\"authenticate()\" >Login</button>\r\n        <div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\r\n            <img style=\"width: 50px\" src=\"../../images/authing.gif\"/>\r\n        </div>\r\n\r\n        <button class=\"btn btn-primary\">Signup</button>\r\n      </div>\r\n\r\n\r\n\r\n      \r\n    </div>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n</clr-main-container>\r\n"
 
 /***/ }),
 
@@ -92,7 +149,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".clr-icon.clr-clarity-logo {\n  background-image: url(\"data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22 standalone%3D%22no%22%3F%3E%3C!--  ~ Copyright (c) 2016 VMware%2C Inc. All Rights Reserved.  ~ This software is released under MIT license.  ~ The full license information can be found in LICENSE in the root directory of this project.  --%3E%3Csvg width%3D%2236px%22 height%3D%2236px%22 viewBox%3D%220 0 36 36%22 version%3D%221.1%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E    %3C!-- Generator%3A Sketch 40.3 (33839) - http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch --%3E    %3Ctitle%3Elogo%3C%2Ftitle%3E    %3Cdesc%3ECreated with Sketch.%3C%2Fdesc%3E    %3Cdefs%3E%3C%2Fdefs%3E    %3Cg id%3D%22Page-1%22 stroke%3D%22none%22 stroke-width%3D%221%22 fill%3D%22none%22 fill-rule%3D%22evenodd%22%3E        %3Cg id%3D%22logo%22 transform%3D%22translate(0.000000%2C 4.500000)%22%3E            %3Cg id%3D%22large%22 transform%3D%22translate(0.000000%2C 0.044118)%22%3E                %3Cpolyline id%3D%22Fill-3%22 fill%3D%22%230095D3%22 points%3D%2224.7018129 0.0388840336 35.979641 6.71768066 35.9614589 20.2811697 24.7018129 26.9417748 18.0173463 22.9707846 29.6688177 16.4295126 29.6688177 10.5321277 24.9216504 7.92742184 18.0321077 3.99030785%22%3E%3C%2Fpolyline%3E                %3Cpolyline id%3D%22Fill-4%22 fill%3D%22%23F38B00%22 points%3D%2211.3313965 0.0388840336 0.0535685039 6.71768066 0.0717505512 20.2811697 11.3313965 26.9417748 18.0166889 22.970061 7.35448694 16.4295126 7.35448694 10.5321277 18.0324642 3.98991663%22%3E%3C%2Fpolyline%3E                %3Cpolyline id%3D%22Fill-5%22 fill%3D%22%23004B70%22 points%3D%2218.017374 22.9708988 11.4990488 18.9719838 18.0212495 15.1272387 24.9510827 19.0786297%22%3E%3C%2Fpolyline%3E                %3Cpolyline id%3D%22Fill-6%22 fill%3D%22%2398441E%22 points%3D%2218.0314053 3.98921729 11.5267517 7.97364692 18.0439938 11.8578324 24.9058951 7.91831944%22%3E%3C%2Fpolyline%3E            %3C%2Fg%3E        %3C%2Fg%3E    %3C%2Fg%3E%3C%2Fsvg%3E\");\n  height: 36px;\n  width: 36px;\n  margin-right: 11px; }\n", ""]);
+exports.push([module.i, ".clr-icon.clr-clarity-logo {\n  background-image: url(\"data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22 standalone%3D%22no%22%3F%3E%0D%3C!--%0D  ~ Copyright (c) 2016 VMware%2C Inc. All Rights Reserved.%0D  ~ This software is released under MIT license.%0D  ~ The full license information can be found in LICENSE in the root directory of this project.%0D  --%3E%0D%3Csvg width%3D%2236px%22 height%3D%2236px%22 viewBox%3D%220 0 36 36%22 version%3D%221.1%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0D    %3C!-- Generator%3A Sketch 40.3 (33839) - http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch --%3E%0D    %3Ctitle%3Elogo%3C%2Ftitle%3E%0D    %3Cdesc%3ECreated with Sketch.%3C%2Fdesc%3E%0D    %3Cdefs%3E%3C%2Fdefs%3E%0D    %3Cg id%3D%22Page-1%22 stroke%3D%22none%22 stroke-width%3D%221%22 fill%3D%22none%22 fill-rule%3D%22evenodd%22%3E%0D        %3Cg id%3D%22logo%22 transform%3D%22translate(0.000000%2C 4.500000)%22%3E%0D            %3Cg id%3D%22large%22 transform%3D%22translate(0.000000%2C 0.044118)%22%3E%0D                %3Cpolyline id%3D%22Fill-3%22 fill%3D%22%230095D3%22 points%3D%2224.7018129 0.0388840336 35.979641 6.71768066 35.9614589 20.2811697 24.7018129 26.9417748 18.0173463 22.9707846 29.6688177 16.4295126 29.6688177 10.5321277 24.9216504 7.92742184 18.0321077 3.99030785%22%3E%3C%2Fpolyline%3E%0D                %3Cpolyline id%3D%22Fill-4%22 fill%3D%22%23F38B00%22 points%3D%2211.3313965 0.0388840336 0.0535685039 6.71768066 0.0717505512 20.2811697 11.3313965 26.9417748 18.0166889 22.970061 7.35448694 16.4295126 7.35448694 10.5321277 18.0324642 3.98991663%22%3E%3C%2Fpolyline%3E%0D                %3Cpolyline id%3D%22Fill-5%22 fill%3D%22%23004B70%22 points%3D%2218.017374 22.9708988 11.4990488 18.9719838 18.0212495 15.1272387 24.9510827 19.0786297%22%3E%3C%2Fpolyline%3E%0D                %3Cpolyline id%3D%22Fill-6%22 fill%3D%22%2398441E%22 points%3D%2218.0314053 3.98921729 11.5267517 7.97364692 18.0439938 11.8578324 24.9058951 7.91831944%22%3E%3C%2Fpolyline%3E%0D            %3C%2Fg%3E%0D        %3C%2Fg%3E%0D    %3C%2Fg%3E%0D%3C%2Fsvg%3E%0D\");\n  height: 36px;\n  width: 36px;\n  margin-right: 11px; }\n", ""]);
 
 // exports
 
@@ -120,7 +177,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
-var AppComponent = /** @class */ (function () {
+var AppComponent = (function () {
     function AppComponent(router, accessToken) {
         this.router = router;
         this.accessToken = accessToken;
@@ -206,7 +263,8 @@ var rewards_component_1 = __webpack_require__("../../../../../src/app/rewards/re
 var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
 var signup_component_1 = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
 var welcome_component_1 = __webpack_require__("../../../../../src/app/welcome/welcome.component.ts");
-var AppModule = /** @class */ (function () {
+var activity_component_1 = __webpack_require__("../../../../../src/app/activity/activity.component.ts");
+var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -219,7 +277,8 @@ var AppModule = /** @class */ (function () {
                 rewards_component_1.RewardsComponent,
                 profile_component_1.ProfileComponent,
                 signup_component_1.SignupComponent,
-                welcome_component_1.WelcomeComponent
+                welcome_component_1.WelcomeComponent,
+                activity_component_1.ActivityComponent
             ],
             imports: [
                 animations_1.BrowserAnimationsModule,
@@ -248,16 +307,20 @@ exports.AppModule = AppModule;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
+var about_component_1 = __webpack_require__("../../../../../src/app/about/about.component.ts");
 var home_component_1 = __webpack_require__("../../../../../src/app/home/home.component.ts");
 var fund_component_1 = __webpack_require__("../../../../../src/app/fund/fund.component.ts");
 var signup_component_1 = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
 var rewards_component_1 = __webpack_require__("../../../../../src/app/rewards/rewards.component.ts");
 var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
 var welcome_component_1 = __webpack_require__("../../../../../src/app/welcome/welcome.component.ts");
+var activity_component_1 = __webpack_require__("../../../../../src/app/activity/activity.component.ts");
 exports.ROUTES = [
     // {path: '', redirectTo: 'welcome', pathMatch: 'full'},
     { path: '', component: welcome_component_1.WelcomeComponent },
     { path: 'home', component: home_component_1.HomeComponent },
+    { path: 'activity', component: activity_component_1.ActivityComponent },
+    { path: 'learn', component: about_component_1.AboutComponent },
     { path: 'profile', component: profile_component_1.ProfileComponent },
     { path: 'fund', component: fund_component_1.FundComponent },
     { path: 'signup', component: signup_component_1.SignupComponent },
@@ -271,7 +334,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/fund/fund.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  fund works!\n</p>\n"
+module.exports = "<p>\r\n  fund works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -309,7 +372,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var FundComponent = /** @class */ (function () {
+var FundComponent = (function () {
     function FundComponent() {
     }
     FundComponent.prototype.ngOnInit = function () {
@@ -332,7 +395,7 @@ exports.FundComponent = FundComponent;
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "Congrats, you are successfully authenticated!"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n        Welcome, user\r\n    </div>\r\n    <div class=\"col-lg-6\">\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-12\">\r\n                       Header Section\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-6\">\r\n                       Left info column<br>\r\n                       <button class=\"btn btn-primary\">Fund Account</button>\r\n\r\n                </div>\r\n\r\n                <div class=\"col-lg-6\">\r\n                       Right info column<br>\r\n                       <button class=\"btn btn-primary\">Savings Insight</button>\r\n\r\n                 </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-12\">\r\n                       Footer Section\r\n                </div>\r\n        </div>\r\n\r\n\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -377,7 +440,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 // Services 
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
-var HomeComponent = /** @class */ (function () {
+var HomeComponent = (function () {
     function HomeComponent(accessToken) {
         this.accessToken = accessToken;
     }
@@ -416,7 +479,7 @@ __export(__webpack_require__("../../../../../src/app/app.module.ts"));
 /***/ "../../../../../src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  profile works!\n</p>\n"
+module.exports = "<p>\r\n  profile works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -454,7 +517,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var ProfileComponent = /** @class */ (function () {
+var ProfileComponent = (function () {
     function ProfileComponent() {
     }
     ProfileComponent.prototype.ngOnInit = function () {
@@ -477,7 +540,7 @@ exports.ProfileComponent = ProfileComponent;
 /***/ "../../../../../src/app/rewards/rewards.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  rewards works!\n</p>\n"
+module.exports = "<p>\r\n  rewards works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -515,7 +578,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var RewardsComponent = /** @class */ (function () {
+var RewardsComponent = (function () {
     function RewardsComponent() {
     }
     RewardsComponent.prototype.ngOnInit = function () {
@@ -552,7 +615,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
-var AccessTokenService = /** @class */ (function () {
+var AccessTokenService = (function () {
     function AccessTokenService(http) {
         this.http = http;
     }
@@ -577,7 +640,7 @@ exports.AccessTokenService = AccessTokenService;
 /***/ "../../../../../src/app/signup/signup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  signup works!\n</p>\n"
+module.exports = "<p>\r\n  signup works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -615,7 +678,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var SignupComponent = /** @class */ (function () {
+var SignupComponent = (function () {
     function SignupComponent() {
     }
     SignupComponent.prototype.ngOnInit = function () {
@@ -638,7 +701,7 @@ exports.SignupComponent = SignupComponent;
 /***/ "../../../../../src/app/welcome/welcome.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  Welcome to the welcome page my dude\n</p>\n\n"
+module.exports = "<p>\r\n  Welcome to the welcome page my dude\r\n</p>\r\n\r\n"
 
 /***/ }),
 
@@ -677,7 +740,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
-var WelcomeComponent = /** @class */ (function () {
+var WelcomeComponent = (function () {
     function WelcomeComponent(accessToken) {
         this.accessToken = accessToken;
     }

@@ -5,7 +5,7 @@
     <div class="branding">
       <a href="/" class="nav-link">
        <!-- <span class="clr-icon clr-clarity-logo"></span> -->
-        <span><img style="width: 30%; " src="../images/wealthsimple-circle.svg"/></span> 
+        <span><img style="width: 30%;" src="../images/wealthsimple-circle.svg"/></span> 
       </a>
     </div>
 
@@ -14,31 +14,17 @@
       <div *ngIf="loggedIn" class="header-nav" [clr-nav-level]="1">
 
           <!-- Left floating tabs -->
-          <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="active"><span class="nav-text">Home</span></a>
-          <a class="nav-link" href="#" [routerLink]="['/fund']" routerLinkActive="active" ><span class="nav-text">Fund</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/home']" routerLinkActive="active" style="margin-left: -100px"><span class="nav-text">Savings</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/activity']" routerLinkActive="active" ><span class="nav-text">Activity</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/fund']" routerLinkActive="active" ><span class="nav-text">Funding</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/learn']" routerLinkActive="active" ><span class="nav-text">Learn</span></a>
+
           <a class="nav-link" href="#" [routerLink]="['/profile']" routerLinkActive="active" ><span class="nav-text">Profile</span></a>
-
           <a class="nav-link" href="#" [routerLink]="['/rewards']" routerLinkActive="active"><span class="nav-text">Earn Rewards</span></a>
-          <a class="nav-link" style="margin-left: 1rem" routerLinkActive="active"><clr-icon shape="cog"></clr-icon></a>
-
-        
-          
+         <!--  <a class="nav-link" style="margin-left: 1rem" routerLinkActive="active"><clr-icon shape="cog"></clr-icon></a> -->
+      
       </div>
 
-      <!-- Unauthetnicated nav bar 
-      <div *ngIf="!loggedIn" class="header-nav" [clr-nav-level]="1">
-
-          <a class="nav-link" href="#" [routerLink]="['/signup']" routerLinkActive="active" style="margin-left: -100%"><span class="nav-text">Sign-up</span></a>
-          
-      </div>
-    -->
-
-<!--
-    <div class="header-actions">
-    </div>
-
-  -->
-  
   </clr-header>
 
 
@@ -53,10 +39,6 @@
       <!-- If not logged in, show unauthorized welcome page -->
       <div *ngIf="!loggedIn">
         <p>Welcome to Jackpot by Wealthsimple
-
-
-
-
 
 
         </p>

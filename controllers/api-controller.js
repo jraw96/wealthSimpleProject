@@ -2,6 +2,13 @@
 //
 // Backend Controller Functions
 const request = require('request')
+const mongojs = require('mongojs')
+const privateData = require('../private/private.js')
+
+// Create a mongoDB connection
+var db = mongojs('mongodb://' + privateData.mongoUser + ':' + privateData.mongoPassword + '@ds263520.mlab.com:63520/wealthsimplejackpot')
+
+
 var ctr = {}
 
 ctr.login = function(req, res){
@@ -29,8 +36,7 @@ ctr.attachInfo = function(req, res){
 ctr.getAllAccounts = function(req, res){
     var response = {}
     response = req.userInfo
-    console.log('oh shit whattup: ' + JSON.stringify(req.userInfo))
-
+    
 
     var options = { method: 'GET',
     url: 'https://api.sandbox.wealthsimple.com/v1/accounts',
@@ -46,7 +52,7 @@ ctr.getAllAccounts = function(req, res){
         res.status(200)
         res.send("Error")
     }else{
-        console.log("Got these accounts back! " + JSON.stringify(body));
+        //console.log("Got these accounts back! " + JSON.stringify(body));
         res.status(200)
         res.send(body)
     }
@@ -57,6 +63,107 @@ ctr.getAllAccounts = function(req, res){
 
 
     
+}
+
+ctr.postJackpotDeposit = function(req, res){
+console.log("Yo, got this from the frontend: " + JSON.stringify(req.body))
+
+
+// Create a deposit decoment
+var deposit = {}
+deposit.depositHistory = []
+deposit["client_id"] = req.userInfo["person"]
+depObj = {}
+
+depObj["depositDate"] = req.body.date
+depObj["amountDeposited"] = req.body.amount
+depObj["accountInfoBeforeDeposit"] = req.body.info
+deposit.depositHistory.push(depObj)
+
+//console.log("Saving this:  " + JSON.stringify(deposit))
+
+
+// Get the user's history to update it
+db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, function(err,data1){
+    if(err){
+        console.log("Shitty, an error happened")
+        res.status(400)
+                var responseObj = {}
+                responseObj.text = "Failure saving deposit information"
+                res.send(responseObj)
+
+    }else{
+        console.log("History found, adding onto it! " + JSON.stringify(data1))
+
+        // Create a record from scratch if there is no existing document
+        if(data1 == null){
+            console.log("Assuming the document has no history")
+            
+
+        db["deposit-history-users"].save(deposit, function(err, data2){
+            if(err){
+                console.log("Error unfortunetly: " + JSON.stringify(err))
+          
+                res.status(400)
+                var responseObj = {}
+                responseObj.text = "Failure saving deposit information"
+                res.send(responseObj)
+          
+            }else{
+              console.log("Successful save! ")
+              var responseObj = {}
+              responseObj.text = "success"
+              res.status(200)
+              res.send(responseObj)
+          
+            }
+          
+          });
+
+
+        // Add to the document history array if it already exists    
+        }else{
+
+            console.log("Got this existing data! Let's update it " + JSON.stringify(data1))
+
+            var updateDepositObj = {}
+            var existingDataHistory = data1.depositHistory
+            existingDataHistory.push(depObj)
+
+            data1["depositHistory"] = existingDataHistory
+
+
+            db["deposit-history-users"].save(data1, function(err, data2){
+                if(err){
+                    console.log("Error updating an existing document: " + JSON.stringify(err))
+              
+                    res.status(400)
+                    var responseObj = {}
+                    responseObj.text = "Failure saving deposit information"
+                    res.send(responseObj)
+              
+                }else{
+                  console.log("Successfully updated an existing object!")
+                  var responseObj = {}
+                  responseObj.text = "successful deposit history update"
+                    res.status(200)
+                  res.send(responseObj)
+              
+                }
+              
+              });
+        }
+    }
+})
+
+
+
+
+
+
+
+
+
 }
 
 

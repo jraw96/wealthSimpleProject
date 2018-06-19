@@ -39,5 +39,8 @@ router.get('/login', checkAuthentication, ctr.login)
 // Get list of all accounts for a user
 router.get('/getAllAccounts', checkAuthentication, ctr.getAllAccounts)
 
+// Make a deposit into a jackpot account
+router.post('/postJackpotDeposit', checkAuthentication, ctr.postJackpotDeposit)
+
 // Expose the api 
 module.exports = router

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from "../services/account.service"
 import { FormsModule } from '@angular/forms';
 
+// TODO: make confirmation message after a successful deposit
+
+
 @Component({
   selector: 'app-fund',
   templateUrl: './fund.component.html',
@@ -25,56 +28,55 @@ export class FundComponent implements OnInit {
   ngOnInit() {
 
     // Get all accounts associated with the logged in user:
-    /*
+    
     this.accountService.getAllAccounts().subscribe(data =>{
       console.log("Holy shit i got this: " + JSON.stringify(data))
+
+      var accounts = this.response["results"]
+      this.amountList = []
+   
+      // Create an array to select accounts
+      for(var i = 0; i<= accounts.length - 1; i++){
+        var obj = {}
+        obj["type"] = accounts[i]["type"]
+        obj["id"] = accounts[i]["id"]
+  
+        // Assuming there is one owners object
+        if(accounts[i]["owners"][0]["account_nickname"]){
+          obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"]
+        }else{
+          obj["nickname"] = ""
+        }
+  
+        obj["amount"] = accounts[i]["net_liquidation"]["amount"]
+        obj["currency"] = accounts[i]["net_liquidation"]["currency"]
+  
+        
+        this.amountList.push(obj)
+      
+      }
+  
+      console.log("Here is the amoutlist: " + JSON.stringify(this.amountList))
+  
+  
+      // Insert the current jackpot amount
+      this.jackpotList = []
+  
+      // There is only one jackpot amount, and its hard coded
+      var temp = {}
+      temp["amount"] = 14355
+      temp["account"] = "Jackpot"
+  
+      this.jackpotList.push(temp)
+    
+  
+    this.getMaxAmount()
+
       
     }, error=>{
       console.log('Yo dawg, got an error: ' + JSON.stringify(error))
 
     })
-
-
-*/
-    var accounts = this.response["results"]
-    this.amountList = []
- 
-    // Create an array to select accounts
-    for(var i = 0; i<= accounts.length - 1; i++){
-      var obj = {}
-      obj["type"] = accounts[i]["type"]
-      obj["id"] = accounts[i]["id"]
-
-      // Assuming there is one owners object
-      if(accounts[i]["owners"][0]["account_nickname"]){
-        obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"]
-      }else{
-        obj["nickname"] = ""
-      }
-
-      obj["amount"] = accounts[i]["net_liquidation"]["amount"]
-      obj["currency"] = accounts[i]["net_liquidation"]["currency"]
-
-      
-      this.amountList.push(obj)
-    
-    }
-
-    console.log("Here is the amoutlist: " + JSON.stringify(this.amountList))
-
-
-    // Insert the current jackpot amount
-    this.jackpotList = []
-
-    // There is only one jackpot amount, and its hard coded
-    var temp = {}
-    temp["amount"] = 14355
-    temp["account"] = "Jackpot"
-
-    this.jackpotList.push(temp)
-  
-
-  this.getMaxAmount()
 
   }
 
@@ -112,12 +114,24 @@ export class FundComponent implements OnInit {
 
   // Submit the deposit to the backend for processing
   submitDeposit(){
+    this.enableDeposit = false
+    
+
+    
     var obj = {}
     obj["info"] = this.amountList[this.accountIndex]
     obj["amount"] = this.enteredAmount
     obj['date'] = this.getDate()
 
+    this.enteredAmount = ""
     console.log("I will send this objet: " + JSON.stringify(obj))
+
+    this.accountService.postJackpotDeposit(obj).subscribe(data =>{
+      console.log("Got this back after a successful post: " + data)
+      
+    }, error => {
+      console.log("Error sending deposit info: " + JSON.stringify(error))
+    })
     
   }
 

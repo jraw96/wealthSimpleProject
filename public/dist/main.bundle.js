@@ -194,7 +194,7 @@ var AppComponent = /** @class */ (function () {
         }, function (error) {
             // If there is a 4.x error, it means the current session is not authenticated. 
             // Set the webpage to display the non-authentiected view
-            _this.loggedIn = true; //false // UNDO
+            _this.loggedIn = false; // UNDO
         });
     };
     AppComponent.prototype.authenticate = function () {
@@ -378,6 +378,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
+// TODO: make confirmation message after a successful deposit
 var FundComponent = /** @class */ (function () {
     function FundComponent(accountService) {
         this.accountService = accountService;
@@ -391,44 +392,39 @@ var FundComponent = /** @class */ (function () {
     }
     FundComponent.prototype.ngOnInit = function () {
         // Get all accounts associated with the logged in user:
-        /*
-        this.accountService.getAllAccounts().subscribe(data =>{
-          console.log("Holy shit i got this: " + JSON.stringify(data))
-          
-        }, error=>{
-          console.log('Yo dawg, got an error: ' + JSON.stringify(error))
-    
-        })
-    
-    
-    */
-        var accounts = this.response["results"];
-        this.amountList = [];
-        // Create an array to select accounts
-        for (var i = 0; i <= accounts.length - 1; i++) {
-            var obj = {};
-            obj["type"] = accounts[i]["type"];
-            obj["id"] = accounts[i]["id"];
-            // Assuming there is one owners object
-            if (accounts[i]["owners"][0]["account_nickname"]) {
-                obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"];
+        var _this = this;
+        this.accountService.getAllAccounts().subscribe(function (data) {
+            console.log("Holy shit i got this: " + JSON.stringify(data));
+            var accounts = _this.response["results"];
+            _this.amountList = [];
+            // Create an array to select accounts
+            for (var i = 0; i <= accounts.length - 1; i++) {
+                var obj = {};
+                obj["type"] = accounts[i]["type"];
+                obj["id"] = accounts[i]["id"];
+                // Assuming there is one owners object
+                if (accounts[i]["owners"][0]["account_nickname"]) {
+                    obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"];
+                }
+                else {
+                    obj["nickname"] = "";
+                }
+                obj["amount"] = accounts[i]["net_liquidation"]["amount"];
+                obj["currency"] = accounts[i]["net_liquidation"]["currency"];
+                _this.amountList.push(obj);
             }
-            else {
-                obj["nickname"] = "";
-            }
-            obj["amount"] = accounts[i]["net_liquidation"]["amount"];
-            obj["currency"] = accounts[i]["net_liquidation"]["currency"];
-            this.amountList.push(obj);
-        }
-        console.log("Here is the amoutlist: " + JSON.stringify(this.amountList));
-        // Insert the current jackpot amount
-        this.jackpotList = [];
-        // There is only one jackpot amount, and its hard coded
-        var temp = {};
-        temp["amount"] = 14355;
-        temp["account"] = "Jackpot";
-        this.jackpotList.push(temp);
-        this.getMaxAmount();
+            console.log("Here is the amoutlist: " + JSON.stringify(_this.amountList));
+            // Insert the current jackpot amount
+            _this.jackpotList = [];
+            // There is only one jackpot amount, and its hard coded
+            var temp = {};
+            temp["amount"] = 14355;
+            temp["account"] = "Jackpot";
+            _this.jackpotList.push(temp);
+            _this.getMaxAmount();
+        }, function (error) {
+            console.log('Yo dawg, got an error: ' + JSON.stringify(error));
+        });
     };
     FundComponent.prototype.getMaxAmount = function () {
         var max = this.amountList[this.accountIndex];
@@ -458,11 +454,18 @@ var FundComponent = /** @class */ (function () {
     };
     // Submit the deposit to the backend for processing
     FundComponent.prototype.submitDeposit = function () {
+        this.enableDeposit = false;
         var obj = {};
         obj["info"] = this.amountList[this.accountIndex];
         obj["amount"] = this.enteredAmount;
         obj['date'] = this.getDate();
+        this.enteredAmount = "";
         console.log("I will send this objet: " + JSON.stringify(obj));
+        this.accountService.postJackpotDeposit(obj).subscribe(function (data) {
+            console.log("Got this back after a successful post: " + data);
+        }, function (error) {
+            console.log("Error sending deposit info: " + JSON.stringify(error));
+        });
     };
     FundComponent.prototype.getDate = function () {
         // Get the current date

@@ -26,6 +26,39 @@ ctr.attachInfo = function(req, res){
     res.send(response)
 }
 
+ctr.getAllAccounts = function(req, res){
+    var response = {}
+    response = req.userInfo
+    console.log('oh shit whattup: ' + JSON.stringify(req.userInfo))
+
+
+    var options = { method: 'GET',
+    url: 'https://api.sandbox.wealthsimple.com/v1/accounts',
+    qs: { client_id: 'person-ephr7kgw-qwxww' },
+    headers:   { 
+        Authorization: 'Bearer ' +  req.userInfo["access_token"]
+        },
+    json: true 
+    };
+
+    request(options, function (error, response, body) {
+    if (error) {
+        res.status(200)
+        res.send("Error")
+    }else{
+        console.log("Got these accounts back! " + JSON.stringify(body));
+        res.status(200)
+        res.send(body)
+    }
+
+
+});
+
+
+
+    
+}
+
 
 // Bundle and export this file for the app.js file
 module.exports = ctr

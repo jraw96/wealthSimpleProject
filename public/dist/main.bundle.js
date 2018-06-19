@@ -164,6 +164,7 @@ module.exports = module.exports.toString();
 
 "use strict";
 
+// TODO: SHow a loading symbol instead of buttons when loading the page
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -193,7 +194,7 @@ var AppComponent = (function () {
         }, function (error) {
             // If there is a 4.x error, it means the current session is not authenticated. 
             // Set the webpage to display the non-authentiected view
-            _this.loggedIn = false;
+            _this.loggedIn = false; // UNDO
         });
     };
     AppComponent.prototype.authenticate = function () {
@@ -254,16 +255,18 @@ var http_2 = __webpack_require__("../../../common/esm5/http.js");
 var angular_1 = __webpack_require__("../../../../@clr/angular/esm5/clr-angular.js");
 var app_component_1 = __webpack_require__("../../../../../src/app/app.component.ts");
 var app_routing_1 = __webpack_require__("../../../../../src/app/app.routing.ts");
+// Components
 var home_component_1 = __webpack_require__("../../../../../src/app/home/home.component.ts");
 var about_component_1 = __webpack_require__("../../../../../src/app/about/about.component.ts");
-// Services
-var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
 var fund_component_1 = __webpack_require__("../../../../../src/app/fund/fund.component.ts");
 var rewards_component_1 = __webpack_require__("../../../../../src/app/rewards/rewards.component.ts");
 var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
 var signup_component_1 = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
 var welcome_component_1 = __webpack_require__("../../../../../src/app/welcome/welcome.component.ts");
 var activity_component_1 = __webpack_require__("../../../../../src/app/activity/activity.component.ts");
+// Services
+var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
+var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -289,7 +292,9 @@ var AppModule = (function () {
                 angular_1.ClarityModule,
                 app_routing_1.ROUTING
             ],
-            providers: [access_token_service_1.AccessTokenService],
+            providers: [access_token_service_1.AccessTokenService,
+                account_service_1.AccountService
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
@@ -372,10 +377,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 var FundComponent = (function () {
-    function FundComponent() {
+    function FundComponent(accountService) {
+        this.accountService = accountService;
     }
     FundComponent.prototype.ngOnInit = function () {
+        // Get all accounts associated with the logged in user:
+        this.accountService.getAllAccounts().subscribe(function (data) {
+            console.log("Holy shit i got this: " + JSON.stringify(data));
+        }, function (error) {
+            console.log('Yo dawg, got an error: ' + JSON.stringify(error));
+        });
     };
     FundComponent = __decorate([
         core_1.Component({
@@ -383,7 +396,7 @@ var FundComponent = (function () {
             template: __webpack_require__("../../../../../src/app/fund/fund.component.html"),
             styles: [__webpack_require__("../../../../../src/app/fund/fund.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [account_service_1.AccountService])
     ], FundComponent);
     return FundComponent;
 }());
@@ -633,6 +646,41 @@ var AccessTokenService = (function () {
     return AccessTokenService;
 }());
 exports.AccessTokenService = AccessTokenService;
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/services/account.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var http_1 = __webpack_require__("../../../common/esm5/http.js");
+var AccountService = (function () {
+    function AccountService(http) {
+        this.http = http;
+    }
+    AccountService.prototype.getAllAccounts = function () {
+        return this.http.get('http://localhost:3000/api/getAllAccounts');
+    };
+    AccountService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.HttpClient])
+    ], AccountService);
+    return AccountService;
+}());
+exports.AccountService = AccountService;
 
 
 /***/ }),

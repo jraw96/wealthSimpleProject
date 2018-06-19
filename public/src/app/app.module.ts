@@ -7,18 +7,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClarityModule } from '@clr/angular';
 import { AppComponent } from './app.component';
 import { ROUTING } from "./app.routing";
+
+// Components
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
-
-
-// Services
-import { AccessTokenService } from "./services/access-token.service";
 import { FundComponent } from './fund/fund.component';
 import { RewardsComponent } from './rewards/rewards.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ActivityComponent } from './activity/activity.component'
+
+// Services
+import { AccessTokenService } from "./services/access-token.service";
+import { AccountService } from "./services/account.service";
 
 @NgModule({
     declarations: [
@@ -41,7 +43,9 @@ import { ActivityComponent } from './activity/activity.component'
         ClarityModule,
         ROUTING
     ],
-    providers: [AccessTokenService],
+    providers: [AccessTokenService, 
+                AccountService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

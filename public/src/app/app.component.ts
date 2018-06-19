@@ -1,3 +1,7 @@
+// TODO: SHow a loading symbol instead of buttons when loading the page
+
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccessTokenService } from "./services/access-token.service"
@@ -22,7 +26,7 @@ export class AppComponent implements OnInit {
         }, error =>{
             // If there is a 4.x error, it means the current session is not authenticated. 
             // Set the webpage to display the non-authentiected view
-            this.loggedIn = false
+            this.loggedIn =  false // UNDO
         })
         
     }

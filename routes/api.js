@@ -22,7 +22,7 @@ function checkAuthentication(req,res,next){
     } else{
         // Set the URL to set the page manually to
         // res.redirect("/login");
-        var authorizeURL = "https://staging.wealthsimple.com/oauth/authorize?response_type=code&client_id=2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=read"
+        var authorizeURL = "https://staging.wealthsimple.com/oauth/authorize?response_type=code&client_id=2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=read%20write"
         var resObj = {}
         resObj.authorizeURL = authorizeURL
         res.status(401) // Set an unauthorized status code

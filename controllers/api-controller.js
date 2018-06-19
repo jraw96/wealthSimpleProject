@@ -14,7 +14,7 @@ var ctr = {}
 ctr.login = function(req, res){
 
     // TODO: Get this to load from the generated url service, not hard coded
-    var authorizeURL = "https://staging.wealthsimple.com/oauth/authorize?response_type=code&client_id=2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=read"
+    var authorizeURL = "https://staging.wealthsimple.com/oauth/authorize?response_type=code&client_id=2bd47d4bcac42fd817c8b3a6da6d792042402a34d034e790ebb73da6315bf833&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=read%20write"
     var resObj = {}
     resObj.authorizeURL = authorizeURL
     res.status(200) // Set an unauthorized status code
@@ -115,7 +115,10 @@ db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, func
               responseObj.text = "success"
               res.status(200)
               res.send(responseObj)
-          
+
+              // Make a formal withdraw request
+                updateJackpot(deposit.depositHistory, req.userInfo)
+                
             }
           
           });
@@ -149,6 +152,8 @@ db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, func
                     res.status(200)
                   res.send(responseObj)
               
+                  // Make a formal withdraw request
+                  updateJackpot(existingDataHistory, req.userInfo)
                 }
               
               });
@@ -157,6 +162,120 @@ db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, func
 })
 
 
+function updateJackpot(updateObj, userInfo){
+    //console.log("Going to update this: " + JSON.stringify(updateObj))
+
+    var access_token = userInfo["access_token"]
+    var client_id = userInfo["person"]
+
+    // Get the most recent update made to an account
+    var account_id = ""
+    var withdraw_amount = 0
+    var withdraw_currency = ""
+
+    console.log("Trying to fix this: " + JSON.stringify(updateObj))
+
+    for(var i = 0; i<= updateObj.length - 1; i++){
+        account_id = updateObj[i]["accountInfoBeforeDeposit"]["id"]
+        withdraw_amount = updateObj[i]["amountDeposited"]
+        withdraw_currency = updateObj[i]["accountInfoBeforeDeposit"]["currency"]
+    }
+    
+
+
+
+    var withdraw_Id = "12341234" // Use random number generator
+
+    console.log("Sanity check access token: " + access_token)
+
+    // Get the Bank Account ID from wealthsimple
+    var options = { method: 'GET',
+    url: 'https://api.sandbox.wealthsimple.com/v1/bank_accounts',
+    headers: 
+    { 
+        Authorization: 'Bearer ' + access_token
+    },
+    json: true
+    };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+
+        console.log("This is the body with the bank account detail: " + JSON.stringify(body))
+     
+        // Assume there is only one result. 
+        var bank_account_id = body.results[0]["id"]
+
+        // Make a withdrawal for the specified account
+        var options = { method: 'POST',
+        url: 'https://api.sandbox.wealthsimple.com/v1/withdrawals',
+        headers: 
+        { 
+            Authorization: 'Bearer ' + access_token,
+            'Content-Type': 'application/json' },
+        body: 
+        { bank_account_id: bank_account_id,
+            account_id: account_id,
+            client_id: client_id,
+            value: { amount: withdraw_amount, currency: withdraw_currency },
+            external_id: withdraw_Id,
+            withdrawal_type: 'full',
+            withdrawal_reason: 'other',
+            withdrawal_reason_details: 'Withdrawing then depositing, to simulate a transfer',
+            payee: 
+            { external_id: 'tfsa-pasi0y3yd', // Hard coded to the ws-simple jackpot account
+                service: 'wealthsimple api',
+                given_name: 'Jake',
+                surname: 'Raw' } },
+        json: true };
+
+        console.log("THis is my final withdraw object:")
+        console.log(JSON.stringify(options))
+
+        request(options, function (error, response, body) {
+        if (error) {
+            console.log("Darn there was an error withdrawing")
+        }else{
+            console.log("Holy shit, sucessful deposit!")
+            console.log(JSON.stringify(body))
+
+
+            // Time to deposit the amount withdrawn from the paying account, in the ws-jackpot account
+            var options = { method: 'POST',
+            url: 'https://api.sandbox.wealthsimple.com/v1/deposits',
+            headers: 
+            { 
+                Authorization: 'Bearer ' + access_token,
+                'Content-Type': 'application/json' },
+            body: 
+            { client_id: 'person-ephr7kgw-qwxww', // Hard coded to the ws-jackpot account
+                bank_account_id: 'bank_account-TnbUM80bYevFcIRqAremGx20k', // Hard coded to the ws-jackpot account
+                account_id: 'tfsa-pasi0y3y', // Hard coded to the ws-simple jackpot account
+                amount: withdraw_amount,
+                currency: withdraw_currency },
+            json: true };
+
+            request(options, function (error, response, body) {
+            if (error){
+                console.log('There was an error depositing the money into the jackpot account ' + JSON.stringify(body))
+            }else{
+                console.log('Congratulations, the amount was deposited into the ws-jackpot account!' + JSON.stringify(body))
+            }
+
+            
+            });
+
+        }
+
+        });
+
+   
+    });
+
+    
+
+    // Deposit the money into the 
+}
 
 
 

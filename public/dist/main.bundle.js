@@ -339,7 +339,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/fund/fund.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h3>Add Savings</h3>\n<div class=\"row\">\n\n  <div class=\"col-lg-5\">\n      <form class=\"deposit-form\">\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>From</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>To</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Amount</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Schedule</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Deposit Date</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n      \n\n      </form>\n\n      <button class=\"btn btn-primary\">Submit Deposit</button>\n  </div>\n\n  <div class=\"col-lg-7\">\n\n \n    \n    </div>\n</div>\n</div>"
+module.exports = "<div class=\"container\">\n  <h3>Add Savings</h3>\n<div class=\"row\">\n\n  <div class=\"col-lg-5\">\n      <form class=\"deposit-form\">\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>From</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\" (change)=\"setAccount($event.target.value)\">\n                           \n                            <option *ngFor=\"let account of amountList; let i = index\" [value]=\"i\">\n                              {{account[\"type\"]}}\n\n                              {{account[\"nickname\"]}}\n                              (${{account[\"amount\"]}} )\n                            </option>\n                                  \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>To</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                        <option *ngFor=\"let pot of jackpotList\">\n                          {{pot[\"account\"]}} \n                          ($ {{pot[\"amount\"]}}) \n                        \n                        </option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Amount <!-- <br> <i>Max: {{currentMax}}</i> --> </label>\n            \n\n                  <input type=\"text\"  [(ngModel)]=\"enteredAmount\" name=\"first\" id=\"formFields_6\" placeholder=\"$\" (keyup)=\"enterAmount()\">\n\n\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Schedule</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>Just Once</option>\n                          <option>Monthly</option>\n                   \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <!--\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Deposit Date</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n        -->\n\n      </form>\n\n      <div *ngIf=\"!enableDeposit\">\n          <button class=\"btn btn-primary\" disabled>Submit Deposit</button>\n      </div>\n      <div *ngIf=\"enableDeposit\">\n          <button class=\"btn btn-primary\" (click)=\"submitDeposit()\">Submit Deposit</button>\n      </div>\n      \n\n  </div>\n\n  <div class=\"col-lg-7\">\n\n \n    \n    </div>\n</div>\n</div>"
 
 /***/ }),
 
@@ -381,15 +381,112 @@ var account_service_1 = __webpack_require__("../../../../../src/app/services/acc
 var FundComponent = /** @class */ (function () {
     function FundComponent(accountService) {
         this.accountService = accountService;
-        this.accounts = JSON.parse("{\"object\":\"account\",\"offset\":0,\"total_count\":5,\"results\":[{\"object\":\"account\",\"id\":\"rrsp-xg-khkux\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"Doge Account xD\"}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-06-11T03:54:26Z\",\"updated_at\":\"2018-06-11T03:54:26Z\"},{\"object\":\"account\",\"id\":\"resp-wlx5r9wc\",\"type\":\"resp_family\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-31T23:31:02Z\",\"updated_at\":\"2018-05-31T23:31:02Z\"},{\"object\":\"account\",\"id\":\"rrsp-i4umimwo\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"2961.38\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"25718.14\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"tfsa-vdguqh-x\",\"type\":\"ca_tfsa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"17259.89\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"66532.53\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"ca-hisa-jyqx0xjd\",\"type\":\"ca_hisa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"8349.88\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"8028.7\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"1000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:30Z\",\"updated_at\":\"2018-05-29T19:04:30Z\"}]}");
+        this.response = JSON.parse("{\"object\":\"account\",\"offset\":0,\"total_count\":5,\"results\":[{\"object\":\"account\",\"id\":\"rrsp-xg-khkux\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"Doge Account xD\"}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-06-11T03:54:26Z\",\"updated_at\":\"2018-06-11T03:54:26Z\"},{\"object\":\"account\",\"id\":\"resp-wlx5r9wc\",\"type\":\"resp_family\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-31T23:31:02Z\",\"updated_at\":\"2018-05-31T23:31:02Z\"},{\"object\":\"account\",\"id\":\"rrsp-i4umimwo\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"2961.38\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"25718.14\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"tfsa-vdguqh-x\",\"type\":\"ca_tfsa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"17259.89\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"66532.53\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"ca-hisa-jyqx0xjd\",\"type\":\"ca_hisa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"8349.88\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"8028.7\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"1000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:30Z\",\"updated_at\":\"2018-05-29T19:04:30Z\"}]}");
+        this.amountList = [];
+        this.accountIndex = 0;
+        this.currentMax = 0;
+        this.enableDeposit = false;
+        this.enteredAmount = "";
+        this.jackpotList = [];
     }
     FundComponent.prototype.ngOnInit = function () {
         // Get all accounts associated with the logged in user:
-        this.accountService.getAllAccounts().subscribe(function (data) {
-            console.log("Holy shit i got this: " + JSON.stringify(data));
-        }, function (error) {
-            console.log('Yo dawg, got an error: ' + JSON.stringify(error));
-        });
+        /*
+        this.accountService.getAllAccounts().subscribe(data =>{
+          console.log("Holy shit i got this: " + JSON.stringify(data))
+          
+        }, error=>{
+          console.log('Yo dawg, got an error: ' + JSON.stringify(error))
+    
+        })
+    
+    
+    */
+        var accounts = this.response["results"];
+        this.amountList = [];
+        // Create an array to select accounts
+        for (var i = 0; i <= accounts.length - 1; i++) {
+            var obj = {};
+            obj["type"] = accounts[i]["type"];
+            obj["id"] = accounts[i]["id"];
+            // Assuming there is one owners object
+            if (accounts[i]["owners"][0]["account_nickname"]) {
+                obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"];
+            }
+            else {
+                obj["nickname"] = "";
+            }
+            obj["amount"] = accounts[i]["net_liquidation"]["amount"];
+            obj["currency"] = accounts[i]["net_liquidation"]["currency"];
+            this.amountList.push(obj);
+        }
+        console.log("Here is the amoutlist: " + JSON.stringify(this.amountList));
+        // Insert the current jackpot amount
+        this.jackpotList = [];
+        // There is only one jackpot amount, and its hard coded
+        var temp = {};
+        temp["amount"] = 14355;
+        temp["account"] = "Jackpot";
+        this.jackpotList.push(temp);
+        this.getMaxAmount();
+    };
+    FundComponent.prototype.getMaxAmount = function () {
+        var max = this.amountList[this.accountIndex];
+        this.currentMax = max["amount"];
+        console.log("Proposing this max amount: " + max["amount"]);
+    };
+    FundComponent.prototype.setAccount = function (thing) {
+        this.accountIndex = thing;
+        this.getMaxAmount();
+    };
+    FundComponent.prototype.enterAmount = function () {
+        console.log("Can I enter this amount: " + this.enteredAmount);
+        var num = Number(this.enteredAmount);
+        console.log("This is num: " + num);
+        if (isNaN(num) || num == 0) {
+            console.log("Not a number");
+            this.enableDeposit = false;
+        }
+        else {
+            if (num < this.currentMax) {
+                this.enableDeposit = true;
+            }
+            else {
+                this.enableDeposit = false;
+            }
+        }
+    };
+    // Submit the deposit to the backend for processing
+    FundComponent.prototype.submitDeposit = function () {
+        var obj = {};
+        obj["info"] = this.amountList[this.accountIndex];
+        obj["amount"] = this.enteredAmount;
+        obj['date'] = this.getDate();
+        console.log("I will send this objet: " + JSON.stringify(obj));
+    };
+    FundComponent.prototype.getDate = function () {
+        // Get the current date
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        var finalDD;
+        if (dd < 10) {
+            finalDD = '0' + dd;
+        }
+        var finalMM;
+        if (mm < 10) {
+            finalMM = '0' + mm;
+        }
+        var finalDay;
+        finalDay = mm + '/' + dd + '/' + yyyy;
+        //console.log("The date: " + finalDay)
+        var dateObj = {};
+        dateObj["finalDD"] = finalDD;
+        dateObj["finalMM"] = finalMM;
+        dateObj["finalDay"] = finalDay;
+        dateObj["dateString"] = finalDay;
+        return dateObj;
     };
     FundComponent = __decorate([
         core_1.Component({
@@ -676,6 +773,9 @@ var AccountService = /** @class */ (function () {
     }
     AccountService.prototype.getAllAccounts = function () {
         return this.http.get('http://localhost:3000/api/getAllAccounts');
+    };
+    AccountService.prototype.postJackpotDeposit = function (postObj) {
+        return this.http.post('http://localhost:3000/api/postJackpotDeposit', postObj);
     };
     AccountService = __decorate([
         core_1.Injectable(),

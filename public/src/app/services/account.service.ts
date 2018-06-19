@@ -10,4 +10,8 @@ export class AccountService {
     return this.http.get('http://localhost:3000/api/getAllAccounts')
   }
 
+  postJackpotDeposit(postObj){
+    return this.http.post('http://localhost:3000/api/postJackpotDeposit', postObj)
+  }
+
 }

@@ -5,7 +5,7 @@
     <div class="branding">
       <a href="/" class="nav-link">
        <!-- <span class="clr-icon clr-clarity-logo"></span> -->
-        <span><img style="width: 30%;" src="../images/wealthsimple-circle.svg"/></span> 
+        <span><img style="width: 100%; border-radius: 10%" src="../images/logo.jpg"/></span> 
       </a>
     </div>
 
@@ -25,6 +25,13 @@
       
       </div>
 
+      <div *ngIf="!loggedIn" class="header-nav" [clr-nav-level]="1">
+
+          <span class="nav-text" style="margin: 18px 0px 0px -110px; font-size: 30px">Jackpot!</span>
+
+      </div>
+
+
   </clr-header>
 
 
@@ -38,29 +45,44 @@
 
       <!-- If not logged in, show unauthorized welcome page -->
       <div *ngIf="!loggedIn">
-        <p>Welcome to Jackpot by Wealthsimple
+        <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+       
+        <h2>
+          What if you could win a huge jackpot, <br>
+          without having to risk losing your money? <br>
+          Yes, for real.
+        </h2>
+        <p style="font-size: 20px">
+          Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,
+          maintaing, and growing deposits over time with cash and prizes. Play the lottery
+          free, and grow your savings while you do it. 
+        </p><br>
 
-
-        </p>
         <button class="btn btn-outline" (click)="authenticate()" >Login</button>
+        <!--
         <div *ngIf="loading" style="margin-left: auto; margin-right: auto">
             <img style="width: 50px" src="../../images/authing.gif"/>
         </div>
+        -->
 
         <button class="btn btn-primary">Signup</button>
-      </div>
 
+          </div>
+          <div class="col-lg-4">
+            <img style="width: 100%" src="../../images/yello-logo.png">
 
+          </div>
 
-      
+      </div>    
+    </div>
+
     </div>
   </div>
 
 
-
-
-
-
+</div>
 
 
 </clr-main-container>

@@ -19,7 +19,7 @@ import { ActivityComponent } from './activity/activity.component'
 
 export const ROUTES: Routes = [
    // {path: '', redirectTo: 'welcome', pathMatch: 'full'},
-    {path: '', component: WelcomeComponent},
+    {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'activity', component: ActivityComponent},
     {path: 'learn', component: AboutComponent},

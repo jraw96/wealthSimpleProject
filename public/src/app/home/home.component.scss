@@ -1,3 +1,19 @@
 // Copyright (c) 2016 VMware, Inc. All Rights Reserved.
 // This software is released under MIT license.
 // The full license information can be found in LICENSE in the root directory of this project.
+
+
+/* Container holding the image and the text */
+.circle-container {
+    position: relative;
+    text-align: center;
+
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px
+}

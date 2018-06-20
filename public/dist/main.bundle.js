@@ -137,7 +137,7 @@ exports.ActivityComponent = ActivityComponent;
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<clr-main-container>\r\n\r\n\r\n  <clr-header>\r\n    <div class=\"branding\">\r\n      <a href=\"/\" class=\"nav-link\">\r\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\r\n        <span><img style=\"width: 100%; border-radius: 10%\" src=\"../images/logo.jpg\"/></span> \r\n      </a>\r\n    </div>\r\n\r\n\r\n      <!-- Authenticated nav bar -->\r\n      <div *ngIf=\"loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <!-- Left floating tabs -->\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\" style=\"margin-left: -100px\"><span class=\"nav-text\">Savings</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/activity']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Activity</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/fund']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Funding</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/learn']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Learn</span></a>\r\n\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/profile']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Profile</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/rewards']\" routerLinkActive=\"active\"><span class=\"nav-text\">Earn Rewards</span></a>\r\n         <!--  <a class=\"nav-link\" style=\"margin-left: 1rem\" routerLinkActive=\"active\"><clr-icon shape=\"cog\"></clr-icon></a> -->\r\n      \r\n      </div>\r\n\r\n      <div *ngIf=\"!loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <span class=\"nav-text\" style=\"margin: 18px 0px 0px -110px; font-size: 30px\">Jackpot!</span>\r\n\r\n      </div>\r\n\r\n\r\n  </clr-header>\r\n\r\n\r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n\r\n      <!-- If logged in, allow access to the app components -->\r\n      <div *ngIf=\"loggedIn\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n\r\n      <!-- If not logged in, show unauthorized welcome page -->\r\n      <div *ngIf=\"!loggedIn\">\r\n        <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-8\">\r\n       \r\n        <h2>\r\n          What if you could win a huge jackpot, <br>\r\n          without having to risk losing your money? <br>\r\n          Yes, for real.\r\n        </h2>\r\n        <p style=\"font-size: 20px\">\r\n          Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,\r\n          maintaing, and growing deposits over time with cash and prizes. Play the lottery\r\n          free, and grow your savings while you do it. \r\n        </p><br>\r\n\r\n        <button class=\"btn btn-outline\" (click)=\"authenticate()\" >Login</button>\r\n        <!--\r\n        <div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\r\n            <img style=\"width: 50px\" src=\"../../images/authing.gif\"/>\r\n        </div>\r\n        -->\r\n\r\n        <button class=\"btn btn-primary\">Signup</button>\r\n\r\n          </div>\r\n          <div class=\"col-lg-4\">\r\n            <img style=\"width: 100%\" src=\"../../images/yello-logo.png\">\r\n\r\n          </div>\r\n\r\n      </div>    \r\n    </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n\r\n</clr-main-container>\r\n"
+module.exports = "<clr-main-container>\r\n\r\n\r\n  <clr-header>\r\n    <div class=\"branding\">\r\n      <a href=\"/\" class=\"nav-link\">\r\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\r\n        <span><img style=\"width: 100%; border-radius: 10%\" src=\"../images/logo.jpg\"/></span> \r\n      </a>\r\n    </div>\r\n\r\n\r\n      <!-- Authenticated nav bar -->\r\n      <div *ngIf=\"loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <!-- Left floating tabs -->\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\" style=\"margin-left: -70px\"><span class=\"nav-text\">Savings</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/activity']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Activity</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/fund']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Funding</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/learn']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Learn</span></a>\r\n\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/profile']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Profile</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/rewards']\" routerLinkActive=\"active\"><span class=\"nav-text\">Earn Rewards</span></a>\r\n         <!--  <a class=\"nav-link\" style=\"margin-left: 1rem\" routerLinkActive=\"active\"><clr-icon shape=\"cog\"></clr-icon></a> -->\r\n      \r\n      </div>\r\n\r\n      <div *ngIf=\"!loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <span class=\"nav-text\" style=\"margin: 18px 0px 0px -110px; font-size: 30px\">Jackpot!</span>\r\n\r\n      </div>\r\n\r\n\r\n  </clr-header>\r\n\r\n\r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n\r\n      <!-- If logged in, allow access to the app components -->\r\n      <div *ngIf=\"loggedIn\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n\r\n      <!-- If not logged in, show unauthorized welcome page -->\r\n      <div *ngIf=\"!loggedIn\">\r\n        <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-8\">\r\n       \r\n        <h2>\r\n          What if you could win a huge jackpot, <br>\r\n          without having to risk losing your money? <br>\r\n          Yes, for real.\r\n        </h2>\r\n        <p style=\"font-size: 20px\">\r\n          Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,\r\n          maintaing, and growing deposits over time with cash and prizes. Play the lottery\r\n          free, and grow your savings while you do it. \r\n        </p><br>\r\n\r\n        <button class=\"btn btn-outline\" (click)=\"authenticate()\" >Login</button>\r\n        <!--\r\n        <div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\r\n            <img style=\"width: 50px\" src=\"../../images/authing.gif\"/>\r\n        </div>\r\n        -->\r\n\r\n        <button class=\"btn btn-primary\">Signup</button>\r\n\r\n          </div>\r\n          <div class=\"col-lg-4\">\r\n            <img style=\"width: 100%\" src=\"../../images/yello-logo.png\">\r\n\r\n          </div>\r\n\r\n      </div>    \r\n    </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n\r\n</clr-main-container>\r\n"
 
 /***/ }),
 
@@ -178,10 +178,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
+var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 var AppComponent = (function () {
-    function AppComponent(router, accessToken) {
+    function AppComponent(router, accessToken, accountService) {
         this.router = router;
         this.accessToken = accessToken;
+        this.accountService = accountService;
         this.loading = false;
         this.loggedIn = false;
     }
@@ -190,6 +192,8 @@ var AppComponent = (function () {
         var _this = this;
         this.accessToken.getSessionInfo().subscribe(function (data) {
             // For successful authentication, enable the authenticated views:
+            console.log("Got these values from logon: " + JSON.stringify(data));
+            _this.accountService.setUser(data["userInfo"]["person"]);
             _this.loggedIn = true;
         }, function (error) {
             // If there is a 4.x error, it means the current session is not authenticated. 
@@ -225,7 +229,7 @@ var AppComponent = (function () {
             template: __webpack_require__("../../../../../src/app/app.component.html"),
             styles: [__webpack_require__("../../../../../src/app/app.component.scss")]
         }),
-        __metadata("design:paramtypes", [router_1.Router, access_token_service_1.AccessTokenService])
+        __metadata("design:paramtypes", [router_1.Router, access_token_service_1.AccessTokenService, account_service_1.AccountService])
     ], AppComponent);
     return AppComponent;
 }());
@@ -318,11 +322,10 @@ var fund_component_1 = __webpack_require__("../../../../../src/app/fund/fund.com
 var signup_component_1 = __webpack_require__("../../../../../src/app/signup/signup.component.ts");
 var rewards_component_1 = __webpack_require__("../../../../../src/app/rewards/rewards.component.ts");
 var profile_component_1 = __webpack_require__("../../../../../src/app/profile/profile.component.ts");
-var welcome_component_1 = __webpack_require__("../../../../../src/app/welcome/welcome.component.ts");
 var activity_component_1 = __webpack_require__("../../../../../src/app/activity/activity.component.ts");
 exports.ROUTES = [
     // {path: '', redirectTo: 'welcome', pathMatch: 'full'},
-    { path: '', component: welcome_component_1.WelcomeComponent },
+    { path: '', component: home_component_1.HomeComponent },
     { path: 'home', component: home_component_1.HomeComponent },
     { path: 'activity', component: activity_component_1.ActivityComponent },
     { path: 'learn', component: about_component_1.AboutComponent },
@@ -511,7 +514,7 @@ exports.FundComponent = FundComponent;
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n        Welcome, user\r\n    </div>\r\n    <div class=\"col-lg-6\">\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-12\">\r\n                       Header Section\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-6\">\r\n                       Left info column<br>\r\n                       <button class=\"btn btn-primary\">Fund Account</button>\r\n\r\n                </div>\r\n\r\n                <div class=\"col-lg-6\">\r\n                       Right info column<br>\r\n                       <button class=\"btn btn-primary\">Savings Insight</button>\r\n\r\n                 </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-12\">\r\n                       Footer Section\r\n                </div>\r\n        </div>\r\n\r\n\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container\">\r\n<div class=\"row\">\r\n    <div class=\"col-lg-5\">\r\n        <h1>Welcome, {{user}}</h1>\r\n        <h3>Your current investment with Jackpot:</h3>\r\n\r\n     <!--   <img width=\"50%\" style=\" display: block; margin: 10px auto 0px auto\" src=\"../../../images/orange-circle.png\"> -->\r\n\r\n        <div class=\"circle-container\" style=\"margin-top: 10px\">\r\n                <img src=\"../../../images/orange-circle.png\" style=\"width:50%;\">\r\n                <div class=\"centered\">{{totalInvestmentAmount}}</div>\r\n        </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-7\">\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-12\">\r\n                       <h1 align=\"center\" >Jackpot by Wealthsimple</h1>\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-6\">\r\n                       <img style=\"border-radius: 20%; margin-top: 20px; display: block; margin-left: auto; margin-right: auto \" src=\"../../../images/slots.jpg\">\r\n                     \r\n\r\n                </div>\r\n\r\n                <div class=\"col-lg-6\">\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Next Draw: </b> {{nextDraw}}</h3>\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Jackpot: </b> ${{jackpot}}</h3>\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Odds*: </b> 1/3</h3>\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Your Entries: </b> {{entries}}</h3>\r\n\r\n                       \r\n                 </div>\r\n\r\n\r\n        </div>\r\n        <div class=\"row\" style=\"padding-top: 12px\">\r\n                <button style=\"display: block; margin-left: auto; margin-right: auto\" class=\"btn btn-primary\">Fund Account</button>\r\n                <button style=\"display: block; margin-left: auto; margin-right: auto\" class=\"btn btn-primary\">Savings Insight</button>\r\n\r\n        </div>\r\n\r\n        <div class=\"row\" style=\"margin-top: 22px\">\r\n                <div class=\"col-lg-12\" style=\"background-color: #FFB565; padding: 0px 20px 20px 20px\">\r\n                    <p style=\"font-size: 16px; text-align: center\">\r\n                      <span style=\"color: white\">Want to turn your savings into income? </span> <a href=\"https://www.wealthsimple.com/en-ca/details\"> Learn more about Wealthsimple products\r\n                       here, and get your first $10,000 managed for free.</a>\r\n                    </p>\r\n                </div>\r\n        </div>\r\n\r\n\r\n    </div>\r\n</div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -523,7 +526,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "/* Container holding the image and the text */\n.circle-container {\n  position: relative;\n  text-align: center; }\n.centered {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  font-size: 40px; }\n", ""]);
 
 // exports
 
@@ -559,6 +562,11 @@ var access_token_service_1 = __webpack_require__("../../../../../src/app/service
 var HomeComponent = (function () {
     function HomeComponent(accessToken) {
         this.accessToken = accessToken;
+        this.user = "jake";
+        this.nextDraw = "Friday, June 22nd";
+        this.entries = 33;
+        this.jackpot = 1500000;
+        this.totalInvestmentAmount = "$7502";
     }
     HomeComponent.prototype.ngOnInit = function () {
         console.log("We loaded to home");
@@ -773,12 +781,20 @@ var http_1 = __webpack_require__("../../../common/esm5/http.js");
 var AccountService = (function () {
     function AccountService(http) {
         this.http = http;
+        this.user = "loading...";
     }
     AccountService.prototype.getAllAccounts = function () {
         return this.http.get('http://localhost:3000/api/getAllAccounts');
     };
     AccountService.prototype.postJackpotDeposit = function (postObj) {
         return this.http.post('http://localhost:3000/api/postJackpotDeposit', postObj);
+    };
+    // Setter for the logged in user
+    AccountService.prototype.setUser = function (user) {
+        this.user = user;
+    };
+    AccountService.prototype.getUser = function () {
+        return this.user;
     };
     AccountService = __decorate([
         core_1.Injectable(),

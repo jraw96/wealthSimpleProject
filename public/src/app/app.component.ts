@@ -5,6 +5,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccessTokenService } from "./services/access-token.service"
+import { AccountService } from "./services/account.service"
 
 @Component({
     selector: 'my-app',
@@ -12,7 +13,7 @@ import { AccessTokenService } from "./services/access-token.service"
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    constructor(private router: Router, private accessToken: AccessTokenService) { }
+    constructor(private router: Router, private accessToken: AccessTokenService, private accountService: AccountService) { }
 
     loading: boolean = false
     loggedIn: boolean = false
@@ -21,6 +22,11 @@ export class AppComponent implements OnInit {
     ngOnInit(){
         this.accessToken.getSessionInfo().subscribe(data => {
            // For successful authentication, enable the authenticated views:
+           console.log("Got these values from logon: " + JSON.stringify(data))
+
+           this.accountService.setUser(data["userInfo"]["person"])
+
+
            this.loggedIn = true
 
         }, error =>{

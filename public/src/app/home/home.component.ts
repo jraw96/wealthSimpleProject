@@ -17,10 +17,20 @@ export class HomeComponent implements OnInit {
 
     constructor(private accessToken: AccessTokenService){}
 
+    user: String = "jake"
+
+    nextDraw: String = "Friday, June 22nd"
+    entries: Number = 33
+    jackpot: Number = 1500000
+
+
+    totalInvestmentAmount: String = "$7502"
+
     ngOnInit() {
         console.log("We loaded to home")
 
 
+        
 
       }
 }

@@ -20,6 +20,10 @@ export class ActivityComponent implements OnInit {
   mongoAccounts: any[] = [] // Saved when the component loads
   selectMongoAccounts: any[] = [] // Used by the UI
 
+  noDeposit: Boolean = true
+
+  noDepositsMessage: String = ""
+
   ngOnInit() {
 
 
@@ -154,6 +158,10 @@ export class ActivityComponent implements OnInit {
 
           // Add this account deposit history to the list of all accounts
           mongoTemp.push(mongoObj)
+            this.noDepositsMessage = ""
+          }else{
+            // Set a status message say are no deposits
+            this.noDepositsMessage = "There are no deposits for: " + currentId
 
           }
           //console.log("Sanity check!!")
@@ -203,6 +211,8 @@ export class ActivityComponent implements OnInit {
       
       this.amountList[index]["mongo"] = false
     }
+
+    this.check4Deposits()
   }
 
   toggleAll(){
@@ -212,7 +222,10 @@ export class ActivityComponent implements OnInit {
     if(!this.toggle){
 
       for(var i = 0; i<= this.amountList.length - 1; i++){
-        this.amountList[i]["active"] = true
+        //this.amountList[i]["active"] = true
+        //this.amountList[i]["mongo"] = true
+        this.loadAccount(i)
+        
       }
 
       this.toggle = true
@@ -220,9 +233,20 @@ export class ActivityComponent implements OnInit {
     }else{
       for(var i = 0; i<= this.amountList.length - 1; i++){
         this.amountList[i]["active"] = false
+        this.amountList[i]["mongo"] = false
+        this.selectMongoAccounts = []
       }
       this.toggle = false
     }
 
+    this.check4Deposits()
+  }
+
+  check4Deposits(){
+    if(this.selectMongoAccounts.length === 0){
+      this.noDeposit = true
+    }else{
+      this.noDeposit = false
+    }
   }
 }

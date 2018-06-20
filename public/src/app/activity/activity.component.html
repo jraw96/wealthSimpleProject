@@ -60,25 +60,34 @@
     </div>
     <div class="col-lg-7" style="margin-left: 50px">
       <h1>Jackpot Deposit History</h1>
+
+      <div *ngIf="!noDeposit">
+      <div *ngFor="let deposit of selectMongoAccounts; let i = index">
       <div class="row">
+         
          
               <div class="card">
                   <div class="card-header">
-                      Deposits
+                     Account: {{deposit["account_Id"]}}
                   </div>
 
-                  <div *ngFor="let deposit of selectMongoAccounts; let i = index">
+                
                     <div class="card-block">
                         <div class="card-title">
-                            {{deposit["account_Id"]}}
+                         History
                         </div>
                         <div class="card-text">
-                            History:  
-                            <div *ngFor="let obj of deposit['account_history']">
-                              {{obj["balanceAfter"]}}
+                          
+                            <div *ngFor="let obj of deposit['account_history']" style="border-bottom: 1px solid #eee; padding-bottom: 15px">
+                              <b>Date: </b> {{obj["date"]}} <br>
+                              <b>Account balance before deposit: </b> $ {{obj["balanceBefore"]}}<br>
+                              <b>Deposit amount:  </b> ${{obj["amount"]}} <br>
+                              <b>Account balance after: </b> $ {{obj["balanceAfter"]}}
+                              
+
                             </div>
                         </div>
-                    </div>
+                    
                   </div>
 
 
@@ -87,8 +96,28 @@
                       <button class="btn btn-sm btn-link">Footer Action 2</button>
                   </div>
               </div>
+              <br>
+            </div>
         
       </div>
+    </div>
+
+    <!-- Show if there are no deposit cards yet -->
+    <div *ngIf="noDeposit">
+        <div class="row">
+      
+                <div class="card">
+                    <div class="card-header">
+                        Select an Account
+                    </div>
+                    <div class="card-text" style="padding: 10px 10px 10px 10px">
+                        {{noDepositsMessage}}
+                    </div>
+       
+             
+            </div>
+        </div>
+    </div>
 
     </div>
   </div>

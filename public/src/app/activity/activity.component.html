@@ -24,7 +24,8 @@
                           <div class="card-text">
 
                               Amount: $ {{account["amount"]}} <br>
-                              Currency: {{account["currency"]}}
+                              Currency: {{account["currency"]}} <br>
+                              ID: {{account["id"]}}
                           </div>
                       </div>
                     </div>
@@ -37,7 +38,8 @@
                           <div class="card-text">
 
                               Amount: $ {{account["amount"]}} <br>
-                              Currency: {{account["currency"]}}
+                              Currency: {{account["currency"]}} <br>
+                              ID: {{account["id"]}}
                           </div>
                       </div>
                     </div>
@@ -62,16 +64,24 @@
          
               <div class="card">
                   <div class="card-header">
-                      Header
+                      Deposits
                   </div>
-                  <div class="card-block">
-                      <div class="card-title">
-                          Block
-                      </div>
-                      <div class="card-text">
-                          ...
-                      </div>
+
+                  <div *ngFor="let deposit of selectMongoAccounts; let i = index">
+                    <div class="card-block">
+                        <div class="card-title">
+                            {{deposit["account_Id"]}}
+                        </div>
+                        <div class="card-text">
+                            History:  
+                            <div *ngFor="let obj of deposit['account_history']">
+                              {{obj["balanceAfter"]}}
+                            </div>
+                        </div>
+                    </div>
                   </div>
+
+
                   <div class="card-footer">
                       <button class="btn btn-sm btn-link">Footer Action 1</button>
                       <button class="btn btn-sm btn-link">Footer Action 2</button>

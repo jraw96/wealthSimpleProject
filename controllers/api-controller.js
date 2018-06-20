@@ -50,13 +50,31 @@ ctr.getAllAccounts = function(req, res){
     request(options, function (error, response, body) {
     if (error) {
         res.status(200)
-        res.send("Error")
+        res.send({"text":"Error"})
     }else{
         //console.log("Got these accounts back! " + JSON.stringify(body));
-        res.status(200)
-        res.send(body)
-    }
+        //res.status(200)
+         //res.send(body)
+         
+        var accountBody = body
 
+        // Get the deposit record associated with the user
+        db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, function(err,data1){
+            if(err){
+                res.status(400)
+                res.send({"text":"Error talking to mongo"})
+            }else{
+                var resBody = {}
+                resBody.accounts = accountBody
+                resBody.mongoHistory = data1
+
+                res.status(200)
+                res.send(resBody)
+            }
+
+        })
+       
+    }
 
 });
 

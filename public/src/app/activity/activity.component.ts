@@ -101,6 +101,7 @@ export class ActivityComponent implements OnInit {
    //console.log("Test: " + JSON.stringify(this.amountList[index]["id"]))
 
     this.amountList[index]["active"] = !(this.amountList[index]["active"])
+    var currentId = this.amountList[index]["id"]
     
     // Update the column of mongo mongo histories
     // Insert the mongo history into the 
@@ -109,11 +110,10 @@ export class ActivityComponent implements OnInit {
       var history = this.mongoAccounts
       console.log("The history: "+ JSON.stringify(history))
 
-      var mongoTemp = []
+      var mongoTemp = this.selectMongoAccounts
 
       for(var i = 0; i <= history.length -1; i++){
         var mongoObj = {}
-        var currentId = this.amountList[index]["id"]
         mongoObj["account_history"] = []
         
         console.log("Active id: " + currentId)
@@ -170,7 +170,6 @@ export class ActivityComponent implements OnInit {
           // Using the spot, push the new deposit object into its deposit object history array
           mongoTemp[spot]["account_history"].push(obj)
 
-
         }
 
       }
@@ -187,10 +186,23 @@ export class ActivityComponent implements OnInit {
 
     // Remove from the deposit history
     }else{
-      this.selectMongoAccounts = this.selectMongoAccounts.slice(index, 1)
+      console.log("Going to delete: " + currentId)
+      if(this.selectMongoAccounts.length > 0){
+       console.log("step 1")
+        // Find the account in the mongo list
+        for(var j = 0; j <= this.selectMongoAccounts.length - 1; j++){
+          console.log(this.selectMongoAccounts[j]["account_Id"] + " and " + currentId)
+          if(currentId === this.selectMongoAccounts[j]["account_Id"]){
+            console.log("YESSSSS")
+            this.selectMongoAccounts.splice(j,1)
+
+            break
+          }
+        }
+    }
+      
       this.amountList[index]["mongo"] = false
     }
-
   }
 
   toggleAll(){

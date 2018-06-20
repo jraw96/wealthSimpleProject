@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /***/ "../../../../../src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\nLearn about stuff here\r\n"
+module.exports = "\nLearn about stuff here\n"
 
 /***/ }),
 
@@ -56,7 +56,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var AboutComponent = (function () {
+var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
         this.open = false;
     }
@@ -76,7 +76,7 @@ exports.AboutComponent = AboutComponent;
 /***/ "../../../../../src/app/activity/activity.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  activity works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-lg-4\" >\n      <h1>Your Accounts</h1>\n      <div class=\"row\">\n         \n              <div class=\"card\">\n                  <div class=\"card-header\">\n                   \n                      <div class=\"toggle-switch\" (change)=\"toggleAll()\">\n                          <input type=\"checkbox\" id=\"toggle_1\">\n                          <label for=\"toggle_1\">All Accounts</label>\n                      </div>\n                  </div>\n\n                  <!-- Show all accounts -->\n                  <div *ngFor=\"let account of amountList; let i = index\">\n\n                    <div *ngIf=\"!account['active']\">\n                      <div class=\"card-block select-color\" (click)=\"loadAccount(i)\" style=\"border-bottom: 1px solid #eee;\">\n                          <div class=\"card-title\">\n                            <b>{{account[\"nickname\"]}}</b>  - {{account[\"type\"]}}\n                          </div>\n                          <div class=\"card-text\">\n\n                              Amount: $ {{account[\"amount\"]}} <br>\n                              Currency: {{account[\"currency\"]}}\n                          </div>\n                      </div>\n                    </div>\n\n                    <div *ngIf=\"account['active']\">\n                      <div class=\"card-block selected-color\" (click)=\"loadAccount(i)\" style=\"border-bottom: 1px solid #eee;\">\n                          <div class=\"card-title\">\n                            <b>{{account[\"nickname\"]}}</b>  - {{account[\"type\"]}}\n                          </div>\n                          <div class=\"card-text\">\n\n                              Amount: $ {{account[\"amount\"]}} <br>\n                              Currency: {{account[\"currency\"]}}\n                          </div>\n                      </div>\n                    </div>\n\n\n                    \n                  </div>\n\n\n                  <div class=\"card-footer\">\n                      <button class=\"btn btn-sm btn-link\">Footer Action 1</button>\n                      <button class=\"btn btn-sm btn-link\">Footer Action 2</button>\n                  </div>\n              </div>\n         \n      </div>\n\n    </div>\n    <div class=\"col-lg-7\" style=\"margin-left: 50px\">\n      <h1>Jackpot Deposit History</h1>\n      <div class=\"row\">\n         \n              <div class=\"card\">\n                  <div class=\"card-header\">\n                      Header\n                  </div>\n                  <div class=\"card-block\">\n                      <div class=\"card-title\">\n                          Block\n                      </div>\n                      <div class=\"card-text\">\n                          ...\n                      </div>\n                  </div>\n                  <div class=\"card-footer\">\n                      <button class=\"btn btn-sm btn-link\">Footer Action 1</button>\n                      <button class=\"btn btn-sm btn-link\">Footer Action 2</button>\n                  </div>\n              </div>\n        \n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -88,7 +88,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".select-color:hover {\n  background-color: #F2F2F2; }\n\n.selected-color {\n  background-color: #DDDDDD; }\n", ""]);
 
 // exports
 
@@ -114,10 +114,85 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var ActivityComponent = (function () {
-    function ActivityComponent() {
+var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
+var ActivityComponent = /** @class */ (function () {
+    function ActivityComponent(accountService) {
+        this.accountService = accountService;
+        this.response = JSON.parse("{\"object\":\"account\",\"offset\":0,\"total_count\":7,\"results\":[{\"object\":\"account\",\"id\":\"tfsa-pasi0y3y\",\"type\":\"ca_tfsa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"ws-jackpot\"}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-06-19T22:12:29Z\",\"updated_at\":\"2018-06-19T22:12:29Z\"},{\"object\":\"account\",\"id\":\"rrsp-ckcdscew\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"ArrrrARRsp\"}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-06-19T21:58:10Z\",\"updated_at\":\"2018-06-19T21:58:10Z\"},{\"object\":\"account\",\"id\":\"rrsp-xg-khkux\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"Doge Account xD\"}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-06-11T03:54:26Z\",\"updated_at\":\"2018-06-11T03:54:26Z\"},{\"object\":\"account\",\"id\":\"resp-wlx5r9wc\",\"type\":\"resp_family\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-31T23:31:02Z\",\"updated_at\":\"2018-05-31T23:31:02Z\"},{\"object\":\"account\",\"id\":\"rrsp-i4umimwo\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"wealthcomplex\"}],\"net_liquidation\":{\"amount\":\"3029.21\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"25897.43\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"tfsa-vdguqh-x\",\"type\":\"ca_tfsa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"First Account\"}],\"net_liquidation\":{\"amount\":\"17765.31\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"67300.45\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"ca-hisa-jyqx0xjd\",\"type\":\"ca_hisa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"So Smart\"}],\"net_liquidation\":{\"amount\":\"8400.35\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"8072.51\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"1000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:30Z\",\"updated_at\":\"2018-05-29T19:04:30Z\"}]}");
+        this.amountList = [];
+        this.toggle = false;
+        this.selectAccounts = [];
     }
     ActivityComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.accountService.getAllAccounts().subscribe(function (data) {
+            console.log("The data: " + JSON.stringify(data));
+            var accounts = data["results"]; //this.response["results"]
+            _this.amountList = [];
+            // Create an array to select accounts
+            for (var i = 0; i <= accounts.length - 1; i++) {
+                var obj = {};
+                obj["type"] = accounts[i]["type"];
+                obj["id"] = accounts[i]["id"];
+                // Assuming there is one owners object
+                if (accounts[i]["owners"][0]["account_nickname"]) {
+                    obj["nickname"] = accounts[i]["owners"][0]["account_nickname"];
+                }
+                else {
+                    obj["nickname"] = "";
+                }
+                obj["amount"] = accounts[i]["net_liquidation"]["amount"];
+                obj["currency"] = accounts[i]["net_liquidation"]["currency"];
+                // Keep track of selected accounts by keeping a corresponding boolean variable that gets toggled
+                var account = {};
+                account["active"] = false;
+                obj["active"] = false;
+                //this.selectAccounts.push(account)
+                _this.amountList.push(obj);
+                console.log("Test: " + _this.selectAccounts[i]["active"]);
+            }
+        }, function (error) {
+            var accounts = _this.response["results"];
+            _this.amountList = [];
+            // Create an array to select accounts
+            for (var i = 0; i <= accounts.length - 1; i++) {
+                var obj = {};
+                obj["type"] = accounts[i]["type"];
+                obj["id"] = accounts[i]["id"];
+                // Assuming there is one owners object
+                if (accounts[i]["owners"][0]["account_nickname"]) {
+                    obj["nickname"] = accounts[i]["owners"][0]["account_nickname"];
+                }
+                else {
+                    obj["nickname"] = "";
+                }
+                obj["amount"] = accounts[i]["net_liquidation"]["amount"];
+                obj["currency"] = accounts[i]["net_liquidation"]["currency"];
+                _this.amountList.push(obj);
+            }
+            console.log("Error getting accounts: " + JSON.stringify(error));
+        });
+    };
+    ActivityComponent.prototype.loadAccount = function (index) {
+        console.log("Setting account: " + index);
+        this.amountList[index]["active"] = !(this.amountList[index]["active"]);
+    };
+    ActivityComponent.prototype.toggleAll = function () {
+        console.log("Toggling!");
+        // IF false, load all accounts
+        if (!this.toggle) {
+            for (var i = 0; i <= this.amountList.length - 1; i++) {
+                this.amountList[i]["active"] = true;
+            }
+            this.toggle = true;
+            // If true, unload all accounts
+        }
+        else {
+            for (var i = 0; i <= this.amountList.length - 1; i++) {
+                this.amountList[i]["active"] = false;
+            }
+            this.toggle = false;
+        }
     };
     ActivityComponent = __decorate([
         core_1.Component({
@@ -125,7 +200,7 @@ var ActivityComponent = (function () {
             template: __webpack_require__("../../../../../src/app/activity/activity.component.html"),
             styles: [__webpack_require__("../../../../../src/app/activity/activity.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [account_service_1.AccountService])
     ], ActivityComponent);
     return ActivityComponent;
 }());
@@ -137,7 +212,7 @@ exports.ActivityComponent = ActivityComponent;
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<clr-main-container>\r\n\r\n\r\n  <clr-header>\r\n    <div class=\"branding\">\r\n      <a href=\"/\" class=\"nav-link\">\r\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\r\n        <span><img style=\"width: 100%; border-radius: 10%\" src=\"../images/logo.jpg\"/></span> \r\n      </a>\r\n    </div>\r\n\r\n\r\n      <!-- Authenticated nav bar -->\r\n      <div *ngIf=\"loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <!-- Left floating tabs -->\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\" style=\"margin-left: -70px\"><span class=\"nav-text\">Savings</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/activity']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Activity</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/fund']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Funding</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/learn']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Learn</span></a>\r\n\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/profile']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Profile</span></a>\r\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/rewards']\" routerLinkActive=\"active\"><span class=\"nav-text\">Earn Rewards</span></a>\r\n         <!--  <a class=\"nav-link\" style=\"margin-left: 1rem\" routerLinkActive=\"active\"><clr-icon shape=\"cog\"></clr-icon></a> -->\r\n      \r\n      </div>\r\n\r\n      <div *ngIf=\"!loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\r\n\r\n          <span class=\"nav-text\" style=\"margin: 18px 0px 0px -110px; font-size: 30px\">Jackpot!</span>\r\n\r\n      </div>\r\n\r\n\r\n  </clr-header>\r\n\r\n\r\n  <div class=\"content-container\">\r\n    <div class=\"content-area\">\r\n\r\n      <!-- If logged in, allow access to the app components -->\r\n      <div *ngIf=\"loggedIn\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n\r\n      <!-- If not logged in, show unauthorized welcome page -->\r\n      <div *ngIf=\"!loggedIn\">\r\n        <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-lg-8\">\r\n       \r\n        <h2>\r\n          What if you could win a huge jackpot, <br>\r\n          without having to risk losing your money? <br>\r\n          Yes, for real.\r\n        </h2>\r\n        <p style=\"font-size: 20px\">\r\n          Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,\r\n          maintaing, and growing deposits over time with cash and prizes. Play the lottery\r\n          free, and grow your savings while you do it. \r\n        </p><br>\r\n\r\n        <button class=\"btn btn-outline\" (click)=\"authenticate()\" >Login</button>\r\n        <!--\r\n        <div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\r\n            <img style=\"width: 50px\" src=\"../../images/authing.gif\"/>\r\n        </div>\r\n        -->\r\n\r\n        <button class=\"btn btn-primary\">Signup</button>\r\n\r\n          </div>\r\n          <div class=\"col-lg-4\">\r\n            <img style=\"width: 100%\" src=\"../../images/yello-logo.png\">\r\n\r\n          </div>\r\n\r\n      </div>    \r\n    </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n\r\n</div>\r\n\r\n\r\n</clr-main-container>\r\n"
+module.exports = "<clr-main-container>\n\n\n  <clr-header>\n    <div class=\"branding\">\n      <a href=\"/\" class=\"nav-link\">\n       <!-- <span class=\"clr-icon clr-clarity-logo\"></span> -->\n        <span><img style=\"width: 100%; border-radius: 10%\" src=\"../images/logo.jpg\"/></span> \n      </a>\n    </div>\n\n\n      <!-- Authenticated nav bar -->\n      <div *ngIf=\"loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\n\n          <!-- Left floating tabs -->\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/home']\" routerLinkActive=\"active\" style=\"margin-left: -70px\"><span class=\"nav-text\">Savings</span></a>\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/activity']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Activity</span></a>\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/fund']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Funding</span></a>\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/learn']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Learn</span></a>\n\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/profile']\" routerLinkActive=\"active\" ><span class=\"nav-text\">Profile</span></a>\n          <a class=\"nav-link\" href=\"#\" [routerLink]=\"['/rewards']\" routerLinkActive=\"active\"><span class=\"nav-text\">Earn Rewards</span></a>\n         <!--  <a class=\"nav-link\" style=\"margin-left: 1rem\" routerLinkActive=\"active\"><clr-icon shape=\"cog\"></clr-icon></a> -->\n      \n      </div>\n\n      <div *ngIf=\"!loggedIn\" class=\"header-nav\" [clr-nav-level]=\"1\">\n\n          <span class=\"nav-text\" style=\"margin: 18px 0px 0px -110px; font-size: 30px\">Jackpot!</span>\n\n      </div>\n\n\n  </clr-header>\n\n\n  <div class=\"content-container\">\n    <div class=\"content-area\">\n\n      <!-- If logged in, allow access to the app components -->\n      <div *ngIf=\"loggedIn\">\n        <router-outlet></router-outlet>\n      </div>\n\n      <!-- If not logged in, show unauthorized welcome page -->\n      <div *ngIf=\"!loggedIn\">\n        <div class=\"container\">\n        <div class=\"row\">\n          <div class=\"col-lg-8\">\n       \n        <h2>\n          What if you could win a huge jackpot, <br>\n          without having to risk losing your money? <br>\n          Yes, for real.\n        </h2>\n        <p style=\"font-size: 20px\">\n          Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,\n          maintaing, and growing deposits over time with cash and prizes. Play the lottery\n          free, and grow your savings while you do it. \n        </p><br>\n\n        <button class=\"btn btn-outline\" (click)=\"authenticate()\" >Login</button>\n        <!--\n        <div *ngIf=\"loading\" style=\"margin-left: auto; margin-right: auto\">\n            <img style=\"width: 50px\" src=\"../../images/authing.gif\"/>\n        </div>\n        -->\n\n        <button class=\"btn btn-primary\">Signup</button>\n\n          </div>\n          <div class=\"col-lg-4\">\n            <img style=\"width: 100%\" src=\"../../images/yello-logo.png\">\n\n          </div>\n\n      </div>    \n    </div>\n\n    </div>\n  </div>\n\n\n</div>\n\n\n</clr-main-container>\n"
 
 /***/ }),
 
@@ -149,7 +224,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".clr-icon.clr-clarity-logo {\n  background-image: url(\"data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22 standalone%3D%22no%22%3F%3E%0D%3C!--%0D  ~ Copyright (c) 2016 VMware%2C Inc. All Rights Reserved.%0D  ~ This software is released under MIT license.%0D  ~ The full license information can be found in LICENSE in the root directory of this project.%0D  --%3E%0D%3Csvg width%3D%2236px%22 height%3D%2236px%22 viewBox%3D%220 0 36 36%22 version%3D%221.1%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0D    %3C!-- Generator%3A Sketch 40.3 (33839) - http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch --%3E%0D    %3Ctitle%3Elogo%3C%2Ftitle%3E%0D    %3Cdesc%3ECreated with Sketch.%3C%2Fdesc%3E%0D    %3Cdefs%3E%3C%2Fdefs%3E%0D    %3Cg id%3D%22Page-1%22 stroke%3D%22none%22 stroke-width%3D%221%22 fill%3D%22none%22 fill-rule%3D%22evenodd%22%3E%0D        %3Cg id%3D%22logo%22 transform%3D%22translate(0.000000%2C 4.500000)%22%3E%0D            %3Cg id%3D%22large%22 transform%3D%22translate(0.000000%2C 0.044118)%22%3E%0D                %3Cpolyline id%3D%22Fill-3%22 fill%3D%22%230095D3%22 points%3D%2224.7018129 0.0388840336 35.979641 6.71768066 35.9614589 20.2811697 24.7018129 26.9417748 18.0173463 22.9707846 29.6688177 16.4295126 29.6688177 10.5321277 24.9216504 7.92742184 18.0321077 3.99030785%22%3E%3C%2Fpolyline%3E%0D                %3Cpolyline id%3D%22Fill-4%22 fill%3D%22%23F38B00%22 points%3D%2211.3313965 0.0388840336 0.0535685039 6.71768066 0.0717505512 20.2811697 11.3313965 26.9417748 18.0166889 22.970061 7.35448694 16.4295126 7.35448694 10.5321277 18.0324642 3.98991663%22%3E%3C%2Fpolyline%3E%0D                %3Cpolyline id%3D%22Fill-5%22 fill%3D%22%23004B70%22 points%3D%2218.017374 22.9708988 11.4990488 18.9719838 18.0212495 15.1272387 24.9510827 19.0786297%22%3E%3C%2Fpolyline%3E%0D                %3Cpolyline id%3D%22Fill-6%22 fill%3D%22%2398441E%22 points%3D%2218.0314053 3.98921729 11.5267517 7.97364692 18.0439938 11.8578324 24.9058951 7.91831944%22%3E%3C%2Fpolyline%3E%0D            %3C%2Fg%3E%0D        %3C%2Fg%3E%0D    %3C%2Fg%3E%0D%3C%2Fsvg%3E%0D\");\n  height: 36px;\n  width: 36px;\n  margin-right: 11px; }\n", ""]);
+exports.push([module.i, ".clr-icon.clr-clarity-logo {\n  background-image: url(\"data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22 standalone%3D%22no%22%3F%3E%3C!--  ~ Copyright (c) 2016 VMware%2C Inc. All Rights Reserved.  ~ This software is released under MIT license.  ~ The full license information can be found in LICENSE in the root directory of this project.  --%3E%3Csvg width%3D%2236px%22 height%3D%2236px%22 viewBox%3D%220 0 36 36%22 version%3D%221.1%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E    %3C!-- Generator%3A Sketch 40.3 (33839) - http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch --%3E    %3Ctitle%3Elogo%3C%2Ftitle%3E    %3Cdesc%3ECreated with Sketch.%3C%2Fdesc%3E    %3Cdefs%3E%3C%2Fdefs%3E    %3Cg id%3D%22Page-1%22 stroke%3D%22none%22 stroke-width%3D%221%22 fill%3D%22none%22 fill-rule%3D%22evenodd%22%3E        %3Cg id%3D%22logo%22 transform%3D%22translate(0.000000%2C 4.500000)%22%3E            %3Cg id%3D%22large%22 transform%3D%22translate(0.000000%2C 0.044118)%22%3E                %3Cpolyline id%3D%22Fill-3%22 fill%3D%22%230095D3%22 points%3D%2224.7018129 0.0388840336 35.979641 6.71768066 35.9614589 20.2811697 24.7018129 26.9417748 18.0173463 22.9707846 29.6688177 16.4295126 29.6688177 10.5321277 24.9216504 7.92742184 18.0321077 3.99030785%22%3E%3C%2Fpolyline%3E                %3Cpolyline id%3D%22Fill-4%22 fill%3D%22%23F38B00%22 points%3D%2211.3313965 0.0388840336 0.0535685039 6.71768066 0.0717505512 20.2811697 11.3313965 26.9417748 18.0166889 22.970061 7.35448694 16.4295126 7.35448694 10.5321277 18.0324642 3.98991663%22%3E%3C%2Fpolyline%3E                %3Cpolyline id%3D%22Fill-5%22 fill%3D%22%23004B70%22 points%3D%2218.017374 22.9708988 11.4990488 18.9719838 18.0212495 15.1272387 24.9510827 19.0786297%22%3E%3C%2Fpolyline%3E                %3Cpolyline id%3D%22Fill-6%22 fill%3D%22%2398441E%22 points%3D%2218.0314053 3.98921729 11.5267517 7.97364692 18.0439938 11.8578324 24.9058951 7.91831944%22%3E%3C%2Fpolyline%3E            %3C%2Fg%3E        %3C%2Fg%3E    %3C%2Fg%3E%3C%2Fsvg%3E\");\n  height: 36px;\n  width: 36px;\n  margin-right: 11px; }\n", ""]);
 
 // exports
 
@@ -179,7 +254,7 @@ var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var router_1 = __webpack_require__("../../../router/esm5/router.js");
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
 var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
-var AppComponent = (function () {
+var AppComponent = /** @class */ (function () {
     function AppComponent(router, accessToken, accountService) {
         this.router = router;
         this.accessToken = accessToken;
@@ -198,7 +273,7 @@ var AppComponent = (function () {
         }, function (error) {
             // If there is a 4.x error, it means the current session is not authenticated. 
             // Set the webpage to display the non-authentiected view
-            _this.loggedIn = false; // UNDO
+            _this.loggedIn = true; //false // UNDO
         });
     };
     AppComponent.prototype.authenticate = function () {
@@ -271,7 +346,7 @@ var activity_component_1 = __webpack_require__("../../../../../src/app/activity/
 // Services
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
 var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
-var AppModule = (function () {
+var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
@@ -342,7 +417,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/fund/fund.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <h3>Add Savings</h3>\r\n<div class=\"row\">\r\n\r\n  <div class=\"col-lg-5\">\r\n      <form class=\"deposit-form\">\r\n          <section class=\"form-block\">\r\n              <div class=\"form-group\">\r\n                  <label>From</label>\r\n\r\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\r\n                      <select id=\"exampleSelect1\" (change)=\"setAccount($event.target.value)\">\r\n                           \r\n                            <option *ngFor=\"let account of amountList; let i = index\" [value]=\"i\">\r\n                              {{account[\"type\"]}}\r\n\r\n                              {{account[\"nickname\"]}}\r\n                              (${{account[\"amount\"]}} )\r\n                            </option>\r\n                                  \r\n                      </select>\r\n                  </div>\r\n              </div>\r\n          </section>\r\n\r\n          <section class=\"form-block\">\r\n              <div class=\"form-group\">\r\n                  <label>To</label>\r\n\r\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\r\n                      <select id=\"exampleSelect1\">\r\n                        <option *ngFor=\"let pot of jackpotList\">\r\n                          {{pot[\"account\"]}} \r\n                          ($ {{pot[\"amount\"]}}) \r\n                        \r\n                        </option>\r\n                      </select>\r\n                  </div>\r\n              </div>\r\n          </section>\r\n\r\n          <section class=\"form-block\">\r\n              <div class=\"form-group\">\r\n                  <label>Amount <!-- <br> <i>Max: {{currentMax}}</i> --> </label>\r\n            \r\n\r\n                  <input type=\"text\"  [(ngModel)]=\"enteredAmount\" name=\"first\" id=\"formFields_6\" placeholder=\"$\" (keyup)=\"enterAmount()\">\r\n\r\n\r\n              </div>\r\n          </section>\r\n\r\n          <section class=\"form-block\">\r\n              <div class=\"form-group\">\r\n                  <label>Schedule</label>\r\n\r\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\r\n                      <select id=\"exampleSelect1\">\r\n                          <option>Just Once</option>\r\n                          <option>Monthly</option>\r\n                   \r\n                      </select>\r\n                  </div>\r\n              </div>\r\n          </section>\r\n\r\n          <!--\r\n          <section class=\"form-block\">\r\n              <div class=\"form-group\">\r\n                  <label>Deposit Date</label>\r\n\r\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\r\n                      <select id=\"exampleSelect1\">\r\n                          <option>MB</option>\r\n                          <option>GB</option>\r\n                          <option>TB</option>\r\n                      </select>\r\n                  </div>\r\n              </div>\r\n          </section>\r\n        -->\r\n\r\n      </form>\r\n\r\n      <div *ngIf=\"!enableDeposit\">\r\n          <button class=\"btn btn-primary\" disabled>Submit Deposit</button>\r\n      </div>\r\n      <div *ngIf=\"enableDeposit\">\r\n          <button class=\"btn btn-primary\" (click)=\"submitDeposit()\">Submit Deposit</button>\r\n      </div>\r\n      \r\n\r\n  </div>\r\n\r\n  <div class=\"col-lg-7\">\r\n\r\n \r\n    \r\n    </div>\r\n</div>\r\n</div>"
+module.exports = "<div class=\"container\">\n  <h3>Add Savings</h3>\n<div class=\"row\">\n\n  <div class=\"col-lg-5\">\n      <form class=\"deposit-form\">\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>From</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\" (change)=\"setAccount($event.target.value)\">\n                           \n                            <option *ngFor=\"let account of amountList; let i = index\" [value]=\"i\">\n                              {{account[\"type\"]}}\n\n                              {{account[\"nickname\"]}}\n                              (${{account[\"amount\"]}} )\n                            </option>\n                                  \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>To</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                        <option *ngFor=\"let pot of jackpotList\">\n                          {{pot[\"account\"]}} \n                          ($ {{pot[\"amount\"]}}) \n                        \n                        </option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Amount <!-- <br> <i>Max: {{currentMax}}</i> --> </label>\n            \n\n                  <input type=\"text\"  [(ngModel)]=\"enteredAmount\" name=\"first\" id=\"formFields_6\" placeholder=\"$\" (keyup)=\"enterAmount()\">\n\n\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Schedule</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>Just Once</option>\n                          <option>Monthly</option>\n                   \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <!--\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Deposit Date</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n        -->\n\n      </form>\n\n      <div *ngIf=\"!enableDeposit\">\n          <button class=\"btn btn-primary\" disabled>Submit Deposit</button>\n      </div>\n      <div *ngIf=\"enableDeposit\">\n          <button class=\"btn btn-primary\" (click)=\"submitDeposit()\">Submit Deposit</button>\n      </div>\n      \n\n  </div>\n\n  <div class=\"col-lg-7\">\n\n \n    \n    </div>\n</div>\n</div>"
 
 /***/ }),
 
@@ -382,7 +457,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 // TODO: make confirmation message after a successful deposit
-var FundComponent = (function () {
+var FundComponent = /** @class */ (function () {
     function FundComponent(accountService) {
         this.accountService = accountService;
         this.response = JSON.parse("{\"object\":\"account\",\"offset\":0,\"total_count\":5,\"results\":[{\"object\":\"account\",\"id\":\"rrsp-xg-khkux\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":\"Doge Account xD\"}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-06-11T03:54:26Z\",\"updated_at\":\"2018-06-11T03:54:26Z\"},{\"object\":\"account\",\"id\":\"resp-wlx5r9wc\",\"type\":\"resp_family\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-31T23:31:02Z\",\"updated_at\":\"2018-05-31T23:31:02Z\"},{\"object\":\"account\",\"id\":\"rrsp-i4umimwo\",\"type\":\"ca_rrsp\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"2961.38\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"25718.14\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"tfsa-vdguqh-x\",\"type\":\"ca_tfsa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"17259.89\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"66532.53\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"10000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:31Z\",\"updated_at\":\"2018-05-29T19:04:31Z\"},{\"object\":\"account\",\"id\":\"ca-hisa-jyqx0xjd\",\"type\":\"ca_hisa\",\"nickname\":null,\"base_currency\":\"CAD\",\"external_id\":null,\"status\":\"open\",\"owners\":[{\"client_id\":\"person-ephr7kgw-qwxww\",\"ownership_type\":\"primary\",\"account_nickname\":null}],\"net_liquidation\":{\"amount\":\"8349.88\",\"currency\":\"CAD\"},\"gross_position\":{\"amount\":\"8028.7\",\"currency\":\"CAD\"},\"total_deposits\":{\"amount\":\"1000.0\",\"currency\":\"CAD\"},\"total_withdrawals\":{\"amount\":\"0.0\",\"currency\":\"CAD\"},\"created_at\":\"2018-05-29T19:04:30Z\",\"updated_at\":\"2018-05-29T19:04:30Z\"}]}");
@@ -514,7 +589,7 @@ exports.FundComponent = FundComponent;
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n<div class=\"row\">\r\n    <div class=\"col-lg-5\">\r\n        <h1>Welcome, {{user}}</h1>\r\n        <h3>Your current investment with Jackpot:</h3>\r\n\r\n     <!--   <img width=\"50%\" style=\" display: block; margin: 10px auto 0px auto\" src=\"../../../images/orange-circle.png\"> -->\r\n\r\n        <div class=\"circle-container\" style=\"margin-top: 10px\">\r\n                <img src=\"../../../images/orange-circle.png\" style=\"width:50%;\">\r\n                <div class=\"centered\">{{totalInvestmentAmount}}</div>\r\n        </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-7\">\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-12\">\r\n                       <h1 align=\"center\" >Jackpot by Wealthsimple</h1>\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"row\">\r\n                <div class=\"col-lg-6\">\r\n                       <img style=\"border-radius: 20%; margin-top: 20px; display: block; margin-left: auto; margin-right: auto \" src=\"../../../images/slots.jpg\">\r\n                     \r\n\r\n                </div>\r\n\r\n                <div class=\"col-lg-6\">\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Next Draw: </b> {{nextDraw}}</h3>\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Jackpot: </b> ${{jackpot}}</h3>\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Odds*: </b> 1/3</h3>\r\n                       <h3 style=\"padding-bottom: 14px\"><b>Your Entries: </b> {{entries}}</h3>\r\n\r\n                       \r\n                 </div>\r\n\r\n\r\n        </div>\r\n        <div class=\"row\" style=\"padding-top: 12px\">\r\n                <button style=\"display: block; margin-left: auto; margin-right: auto\" class=\"btn btn-primary\">Fund Account</button>\r\n                <button style=\"display: block; margin-left: auto; margin-right: auto\" class=\"btn btn-primary\">Savings Insight</button>\r\n\r\n        </div>\r\n\r\n        <div class=\"row\" style=\"margin-top: 22px\">\r\n                <div class=\"col-lg-12\" style=\"background-color: #FFB565; padding: 0px 20px 20px 20px\">\r\n                    <p style=\"font-size: 16px; text-align: center\">\r\n                      <span style=\"color: white\">Want to turn your savings into income? </span> <a href=\"https://www.wealthsimple.com/en-ca/details\"> Learn more about Wealthsimple products\r\n                       here, and get your first $10,000 managed for free.</a>\r\n                    </p>\r\n                </div>\r\n        </div>\r\n\r\n\r\n    </div>\r\n</div>\r\n\r\n</div>"
+module.exports = "<div class=\"container\">\n<div class=\"row\">\n    <div class=\"col-lg-5\">\n        <h1>Welcome, {{user}}</h1>\n        <h3>Your current investment with Jackpot:</h3>\n\n     <!--   <img width=\"50%\" style=\" display: block; margin: 10px auto 0px auto\" src=\"../../../images/orange-circle.png\"> -->\n\n        <div class=\"circle-container\" style=\"margin-top: 10px\">\n                <img src=\"../../../images/orange-circle.png\" style=\"width:50%;\">\n                <div class=\"centered\">{{totalInvestmentAmount}}</div>\n        </div>\n\n    </div>\n    <div class=\"col-lg-7\">\n        <div class=\"row\">\n                <div class=\"col-lg-12\">\n                       <h1 align=\"center\" >Jackpot by Wealthsimple</h1>\n                </div>\n        </div>\n\n        <div class=\"row\">\n                <div class=\"col-lg-6\">\n                       <img style=\"border-radius: 20%; margin-top: 20px; display: block; margin-left: auto; margin-right: auto \" src=\"../../../images/slots.jpg\">\n                     \n\n                </div>\n\n                <div class=\"col-lg-6\">\n                       <h3 style=\"padding-bottom: 14px\"><b>Next Draw: </b> {{nextDraw}}</h3>\n                       <h3 style=\"padding-bottom: 14px\"><b>Jackpot: </b> ${{jackpot}}</h3>\n                       <h3 style=\"padding-bottom: 14px\"><b>Odds*: </b> 1/3</h3>\n                       <h3 style=\"padding-bottom: 14px\"><b>Your Entries: </b> {{entries}}</h3>\n\n                       \n                 </div>\n\n\n        </div>\n        <div class=\"row\" style=\"padding-top: 12px\">\n                <button style=\"display: block; margin-left: auto; margin-right: auto\" class=\"btn btn-primary\">Fund Account</button>\n                <button style=\"display: block; margin-left: auto; margin-right: auto\" class=\"btn btn-primary\">Savings Insight</button>\n\n        </div>\n\n        <div class=\"row\" style=\"margin-top: 22px\">\n                <div class=\"col-lg-12\" style=\"background-color: #FFB565; padding: 0px 20px 20px 20px;\">\n                    <p style=\"font-size: 16px; text-align: center\">\n                      <span style=\"color: white\">Want to turn your savings into income? </span> <a href=\"https://www.wealthsimple.com/en-ca/details\"> Learn more about Wealthsimple products\n                       here, and get your first $10,000 managed for free.</a>\n                    </p>\n                </div>\n        </div>\n\n\n    </div>\n</div>\n\n</div>"
 
 /***/ }),
 
@@ -526,7 +601,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "/* Container holding the image and the text */\n.circle-container {\n  position: relative;\n  text-align: center; }\n.centered {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  font-size: 40px; }\n", ""]);
+exports.push([module.i, "/* Container holding the image and the text */\n.circle-container {\n  position: relative;\n  text-align: center; }\n\n.centered {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n  font-size: 40px; }\n", ""]);
 
 // exports
 
@@ -559,7 +634,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 // Services 
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
-var HomeComponent = (function () {
+var HomeComponent = /** @class */ (function () {
     function HomeComponent(accessToken) {
         this.accessToken = accessToken;
         this.user = "jake";
@@ -603,7 +678,7 @@ __export(__webpack_require__("../../../../../src/app/app.module.ts"));
 /***/ "../../../../../src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  profile works!\r\n</p>\r\n"
+module.exports = "<p>\n  profile works!\n</p>\n"
 
 /***/ }),
 
@@ -641,7 +716,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var ProfileComponent = (function () {
+var ProfileComponent = /** @class */ (function () {
     function ProfileComponent() {
     }
     ProfileComponent.prototype.ngOnInit = function () {
@@ -664,7 +739,7 @@ exports.ProfileComponent = ProfileComponent;
 /***/ "../../../../../src/app/rewards/rewards.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  rewards works!\r\n</p>\r\n"
+module.exports = "<p>\n  rewards works!\n</p>\n"
 
 /***/ }),
 
@@ -702,7 +777,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var RewardsComponent = (function () {
+var RewardsComponent = /** @class */ (function () {
     function RewardsComponent() {
     }
     RewardsComponent.prototype.ngOnInit = function () {
@@ -739,7 +814,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
-var AccessTokenService = (function () {
+var AccessTokenService = /** @class */ (function () {
     function AccessTokenService(http) {
         this.http = http;
     }
@@ -778,7 +853,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var http_1 = __webpack_require__("../../../common/esm5/http.js");
-var AccountService = (function () {
+var AccountService = /** @class */ (function () {
     function AccountService(http) {
         this.http = http;
         this.user = "loading...";
@@ -810,7 +885,7 @@ exports.AccountService = AccountService;
 /***/ "../../../../../src/app/signup/signup.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  signup works!\r\n</p>\r\n"
+module.exports = "<p>\n  signup works!\n</p>\n"
 
 /***/ }),
 
@@ -848,7 +923,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
-var SignupComponent = (function () {
+var SignupComponent = /** @class */ (function () {
     function SignupComponent() {
     }
     SignupComponent.prototype.ngOnInit = function () {
@@ -871,7 +946,7 @@ exports.SignupComponent = SignupComponent;
 /***/ "../../../../../src/app/welcome/welcome.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  Welcome to the welcome page my dude\r\n</p>\r\n\r\n"
+module.exports = "<p>\n  Welcome to the welcome page my dude\n</p>\n\n"
 
 /***/ }),
 
@@ -910,7 +985,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
-var WelcomeComponent = (function () {
+var WelcomeComponent = /** @class */ (function () {
     function WelcomeComponent(accessToken) {
         this.accessToken = accessToken;
     }

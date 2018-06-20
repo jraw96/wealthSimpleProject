@@ -1,3 +1,85 @@
-<p>
-  activity works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4" >
+      <h1>Your Accounts</h1>
+      <div class="row">
+         
+              <div class="card">
+                  <div class="card-header">
+                   
+                      <div class="toggle-switch" (change)="toggleAll()">
+                          <input type="checkbox" id="toggle_1">
+                          <label for="toggle_1">All Accounts</label>
+                      </div>
+                  </div>
+
+                  <!-- Show all accounts -->
+                  <div *ngFor="let account of amountList; let i = index">
+
+                    <div *ngIf="!account['active']">
+                      <div class="card-block select-color" (click)="loadAccount(i)" style="border-bottom: 1px solid #eee;">
+                          <div class="card-title">
+                            <b>{{account["nickname"]}}</b>  - {{account["type"]}}
+                          </div>
+                          <div class="card-text">
+
+                              Amount: $ {{account["amount"]}} <br>
+                              Currency: {{account["currency"]}}
+                          </div>
+                      </div>
+                    </div>
+
+                    <div *ngIf="account['active']">
+                      <div class="card-block selected-color" (click)="loadAccount(i)" style="border-bottom: 1px solid #eee;">
+                          <div class="card-title">
+                            <b>{{account["nickname"]}}</b>  - {{account["type"]}}
+                          </div>
+                          <div class="card-text">
+
+                              Amount: $ {{account["amount"]}} <br>
+                              Currency: {{account["currency"]}}
+                          </div>
+                      </div>
+                    </div>
+
+
+                    
+                  </div>
+
+
+                  <div class="card-footer">
+                      <button class="btn btn-sm btn-link">Footer Action 1</button>
+                      <button class="btn btn-sm btn-link">Footer Action 2</button>
+                  </div>
+              </div>
+         
+      </div>
+
+    </div>
+    <div class="col-lg-7" style="margin-left: 50px">
+      <h1>Jackpot Deposit History</h1>
+      <div class="row">
+         
+              <div class="card">
+                  <div class="card-header">
+                      Header
+                  </div>
+                  <div class="card-block">
+                      <div class="card-title">
+                          Block
+                      </div>
+                      <div class="card-text">
+                          ...
+                      </div>
+                  </div>
+                  <div class="card-footer">
+                      <button class="btn btn-sm btn-link">Footer Action 1</button>
+                      <button class="btn btn-sm btn-link">Footer Action 2</button>
+                  </div>
+              </div>
+        
+      </div>
+
+    </div>
+  </div>
+</div>

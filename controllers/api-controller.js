@@ -300,6 +300,8 @@ function updateJackpot(updateObj, userInfo){
 // Get the person information associated with the account
 ctr.getPerson = function(req, res){
 
+console.log("Getting person!")
+
 
     var options = { 
  method: 'GET',
@@ -322,14 +324,81 @@ request(options, function (error, response, body) {
         console.log('Error getting account information: ' + JSON.stringify(error))
         res.send(error)
     }else{
-        console.log("The success body; " + JSON.stringify(body))
-        res.status(200)
-        res.send(body)
+
+        var personBody = {}
+        personBody = body
+
+        console.log("Finding this guy: " + req.userInfo["person"])
+
+        // Get the mongo data records associated with the person:
+        db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, function(err,data){
+            if(err){
+                res.status(400)
+                console.log("Error!!!")
+                res.send({"text":"Error talking to mongo"})
+            }else{
+    
+                // console.log("Here is the mongo data records: " + JSON.stringify(data))
+    
+                 var records = data["depositHistory"]
+                 var total = 0
+                 for(var i = 0; i<=records.length - 1; i++){
+                   //  console.log("the record: " + JSON.stringify(records[i]))
+                    // console.log("HEre is the amount: " + records[i]["amount"])
+                    total = total + Number(records[i]["amountDeposited"])
+                  //  console.log("New total: " + total)
+                 }
+    
+                 var baseBallots = 0.02 * total
+
+                 baseBallots = Math.ceil(baseBallots)
+    
+                // console.log("The base ballots: " + baseBallots)
+    
+                var resBody = {}
+                resBody.personBody = personBody
+                resBody.totalInvestment = total
+                resBody.baseBallots = baseBallots
+             
+    
+                res.status(200)
+                res.send(resBody)
+            }
+    
+        })
     }
 });
 
 }
 
+/*
+ctr.getTotalJackpotInvestment = function(req, res){
+
+    // Get the deposit record for the user:
+    db["deposit-history-users"].findOne({"client_id" : req.userInfo["person"]}, function(err,data){
+        if(err){
+            res.status(400)
+            res.send({"text":"Error talking to mongo"})
+        }else{
+
+             console.log("Here is the mongo data records: " + JSON.stringify(data))
+
+
+
+
+
+            var resBody = {}
+            resBody.accounts = accountBody
+            resBody.mongoHistory = data1
+
+            res.status(200)
+            res.send(resBody)
+        }
+
+    })
+
+}
+*/
 
 // Bundle and export this file for the app.js file
 module.exports = ctr

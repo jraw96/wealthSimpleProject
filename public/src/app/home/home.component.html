@@ -2,13 +2,13 @@
 <div class="row">
     <div class="col-lg-5">
         <h1>Welcome, {{user}}</h1>
-        <h3>Your current investment with Jackpot:</h3>
+        <h3>Your current savings in Jackpot:</h3>
 
      <!--   <img width="50%" style=" display: block; margin: 10px auto 0px auto" src="../../../images/orange-circle.png"> -->
 
         <div class="circle-container" style="margin-top: 10px">
                 <img src="../../../images/orange-circle.png" style="width:50%;">
-                <div class="centered">{{totalInvestmentAmount}}</div>
+                <div class="centered">${{investmentAmount}}</div>
         </div>
 
     </div>
@@ -38,7 +38,7 @@
 
         </div>
         <div class="row" style="padding-top: 12px">
-                <button style="display: block; margin-left: auto; margin-right: auto" class="btn btn-primary">Fund Account</button>
+                <button style="display: block; margin-left: auto; margin-right: auto" (click)="gotoFunding()" class="btn btn-primary">Fund Account</button>
                 <button style="display: block; margin-left: auto; margin-right: auto" class="btn btn-primary">Savings Insight</button>
 
         </div>

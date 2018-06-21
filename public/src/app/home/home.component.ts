@@ -1,5 +1,7 @@
 
 import { Component, OnInit} from "@angular/core";
+import { Router } from '@angular/router';
+
 
 // Services 
 import { AccessTokenService } from "../services/access-token.service"
@@ -12,16 +14,19 @@ import { AccountService } from "../services/account.service"
 export class HomeComponent implements OnInit {
 
     constructor(private accessToken: AccessTokenService,
+        private router: Router,
                 private accountService: AccountService){}
 
     user: String = ""
 
     nextDraw: String = "Friday, June 22nd"
-    entries: Number = 33
+    entries: Number = 0
     jackpot: Number = 1500000
 
+    investmentAmount: Number = 0
 
-    totalInvestmentAmount: String = "$7502"
+
+   // totalInvestmentAmount: String = "$7502"
 
     ngOnInit() {
         console.log("We loaded to home")
@@ -33,7 +38,10 @@ export class HomeComponent implements OnInit {
             // Assume there is one person result that comes back
           
             var person = {}
-            person = data["results"][0]
+            person = data["personBody"]["results"][0]
+            //console.log("The total amount: " + data["totalAmount"])
+            this.investmentAmount = data["totalInvestment"]
+            this.entries = data["baseBallots"]
 
             this.user = person["preferred_first_name"]
 
@@ -128,4 +136,10 @@ export class HomeComponent implements OnInit {
         })
 
       }
+
+      gotoFunding(){
+          console.log("Switchin to fund!")
+        this.router.navigate(['/fund']);
+    }
+
 }

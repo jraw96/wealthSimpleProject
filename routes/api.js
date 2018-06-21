@@ -45,5 +45,8 @@ router.post('/postJackpotDeposit', checkAuthentication, ctr.postJackpotDeposit)
 // Get the person information associated with the authenticated user
 router.get('/getPerson', checkAuthentication, ctr.getPerson)
 
+// Get the total amount the user has entered into the jackpot
+//router.get('/totalJackpotInvestment', checkAuthentication, ctr.getTotalJackpotInvestment)
+
 // Expose the api 
 module.exports = router

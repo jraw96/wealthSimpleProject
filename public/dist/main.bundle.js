@@ -943,7 +943,7 @@ exports.ProfileComponent = ProfileComponent;
 /***/ "../../../../../src/app/rewards/rewards.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  rewards works!\r\n</p>\r\n"
+module.exports = "<div class=\"container\">\r\n  <h1>Your Rewards</h1>\r\n    <div class=\"row\">\r\n\r\n        <div *ngIf=\"showDepositReward\" class=\"col-lg-6 \">\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    Invest an additional: $25\r\n                    <span style=\"float:right; font-size: 15px\"><i> Completed!</i></span>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                  \r\n                    <div class=\"card-text\">\r\n                      By reaching this target investmount amoun each month, users are guaranteed entry into next month's Jackpot draw. \r\n                    </div>\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <button class=\"btn btn-sm btn-link\" (click)=\"hideReward('deposit')\">Hide Reward</button>\r\n     \r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div *ngIf=\"showReferralReward\" class=\"col-lg-6\">\r\n            <div class=\"card\">\r\n                <div class=\"card-header\">\r\n                    Invite Friends\r\n                    <span style=\"float:right; font-size: 15px\"> (+1) Succesful referral this month</span>\r\n                </div>\r\n                <div class=\"card-block\">\r\n                    \r\n                    <div class=\"card-text\">\r\n                        Invite friends to Jackpot and earn an additional 3 ballots for each friend that funds their account.\r\n                    </div>\r\n\r\n                    <div class=\"form-group\" style=\"margin-bottom: 15px\">\r\n                        <label for=\"formFields_10\">Email: </label>\r\n                        <input type=\"tel\" id=\"formFields_10\" size=\"35\">\r\n                        <button class=\"btn btn-outline\" style=\"float:right\">Send</button>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <button class=\"btn btn-sm btn-link\" (click)=\"hideReward('refer')\">Hide Reward</button>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"showReturn\">\r\n        <button class=\"btn btn-link\" (click)=\"showRewards()\">Unhide Rewards</button>\r\n      </div>\r\n</div>"
 
 /***/ }),
 
@@ -983,8 +983,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var RewardsComponent = (function () {
     function RewardsComponent() {
+        this.showDepositReward = true;
+        this.showReferralReward = true;
+        this.showReturn = false;
     }
     RewardsComponent.prototype.ngOnInit = function () {
+    };
+    RewardsComponent.prototype.hideReward = function (type) {
+        if (type === "deposit") {
+            this.showDepositReward = false;
+        }
+        if (type === "refer") {
+            this.showReferralReward = false;
+        }
+        if (!this.showDepositReward && !this.showReferralReward) {
+            this.showReturn = true;
+        }
+        else {
+            this.showReturn = false;
+        }
+    };
+    RewardsComponent.prototype.showRewards = function () {
+        this.showDepositReward = true;
+        this.showReferralReward = true;
+        this.showReturn = false;
     };
     RewardsComponent = __decorate([
         core_1.Component({

@@ -1,3 +1,53 @@
-<p>
-  rewards works!
-</p>
+<div class="container">
+  <h1>Your Rewards</h1>
+    <div class="row">
+
+        <div *ngIf="showDepositReward" class="col-lg-6 ">
+            <div class="card">
+                <div class="card-header">
+                    Invest an additional: $25
+                    <span style="float:right; font-size: 15px"><i> Completed!</i></span>
+                </div>
+                <div class="card-block">
+                  
+                    <div class="card-text">
+                      By reaching this target investmount amoun each month, users are guaranteed entry into next month's Jackpot draw. 
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-link" (click)="hideReward('deposit')">Hide Reward</button>
+     
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="showReferralReward" class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    Invite Friends
+                    <span style="float:right; font-size: 15px"> (+1) Succesful referral this month</span>
+                </div>
+                <div class="card-block">
+                    
+                    <div class="card-text">
+                        Invite friends to Jackpot and earn an additional 3 ballots for each friend that funds their account.
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 15px">
+                        <label for="formFields_10">Email: </label>
+                        <input type="tel" id="formFields_10" size="35">
+                        <button class="btn btn-outline" style="float:right">Send</button>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-link" (click)="hideReward('refer')">Hide Reward</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showReturn">
+        <button class="btn btn-link" (click)="showRewards()">Unhide Rewards</button>
+      </div>
+</div>

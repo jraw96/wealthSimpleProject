@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterObserverService } from "../services/router-observer.service"
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ro: RouterObserverService) { }
 
-  ngOnInit() {
+  ngOnInit(){
+    // send message to subscribers via observable subject
+    this.ro.sendData('Message from Child One Component!');
+  }
+
+  sendData(){
+    this.ro.sendData('Message from button Click on Child One');
+  }
+
+  ngOnDestroy(){
+      // clear message
+      this.ro.clearData();
+  }
+
+  clearData(){
+    // clear message
+      this.ro.clearData();
   }
 
 }

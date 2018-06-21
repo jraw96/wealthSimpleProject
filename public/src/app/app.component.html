@@ -43,33 +43,88 @@
         <router-outlet></router-outlet>
       </div>
 
+
+
+
       <!-- If not logged in, show unauthorized welcome page -->
       <div *ngIf="!loggedIn">
         <div class="container">
         <div class="row">
-          <div class="col-lg-8">
-       
-        <h2>
-          What if you could win a huge jackpot, <br>
-          without having to risk losing your money? <br>
-          Yes, for real.
-        </h2>
-        <p style="font-size: 20px">
-          Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,
-          maintaing, and growing deposits over time with cash and prizes. Play the lottery
-          free, and grow your savings while you do it. 
-        </p><br>
 
-        <button class="btn btn-outline" (click)="authenticate()" >Login</button>
-        <!--
-        <div *ngIf="loading" style="margin-left: auto; margin-right: auto">
-            <img style="width: 50px" src="../../images/authing.gif"/>
-        </div>
-        -->
 
-        <button class="btn btn-primary">Signup</button>
+          <!-- Default home page options -->
+         
+            <div class="col-lg-8">  
+                <div *ngIf="!signingUp">
+              <h2>
+                What if you could win a huge jackpot, <br>
+                without having to risk losing your money? <br>
+                Yes, for real.
+              </h2>
+              <p style="font-size: 20px">
+                Jackpot is a lottery-linked savings account. Our accounts reward YOU for making,
+                maintaing, and growing deposits over time with cash and prizes. Play the lottery
+                free, and grow your savings while you do it. 
+              </p><br>
 
+              <button class="btn btn-outline" (click)="authenticate()" >Login</button>
+              <!--
+              <div *ngIf="loading" style="margin-left: auto; margin-right: auto">
+                  <img style="width: 50px" src="../../images/authing.gif"/>
+              </div>
+              -->
+
+              <button class="btn btn-primary" (click)="gotoSignup()" >Signup</button>
+
+            </div>
+             <!-- Signup options revealed -->
+          <div *ngIf="signingUp">
+              
+              <form style="background-color: #F2F2F2; padding-left: 15px; padding-bottom: 15px; border-radius: 5px">
+                  <section class="form-block">
+                      <h1 style="margin-bottom: 15px">Signin-up</h1>
+                      <div class="form-group">
+                          <label for="formFields_9" style="font-size: 20px">First Name</label>
+                          <input type="url" [(ngModel)]="firstName" name="q" (keyup)="firstNameCheck()" id="formFields_9"size="35">
+                      </div>
+
+                      <div class="form-group">
+                          <label for="formFields_10" style="font-size: 20px">Last Name </label>
+                          <input type="tel" [(ngModel)]="lastName"  name="qq" (keyup)="lastNameCheck()" id="formFields_10" size="35">
+                      </div>
+
+                      <div class="form-group">
+                          <label for="formFields_10" style="font-size: 20px">Email address</label>
+                          <input type="tel" [(ngModel)]="emailAddress"  name="qqq" (keyup)="emailAddressCheck()" id="formFields_10" size="35">
+                      </div>
+
+                      <div class="form-group">
+                          <label for="formFields_10" style="font-size: 20px">Phone Number</label>
+                          <input type="tel" [(ngModel)]="phoneNumber"  name="qqqq" (keyup)="phoneNumberCheck()" id="formFields_10" size="35">
+                      </div>
+
+                      <div class="checkbox" style="margin-top: 20px" (change)="conditionsCheck()">
+                          <input type="checkbox" id="checkrads_1">
+                          <label for="checkrads_1">Read and Agreed to our Terms and Conditions of Service</label>
+                      </div>
+
+                  </section>
+              </form>
+
+              <div *ngIf="enableSubmit">
+                  <button class="btn btn-primary" style="display:block; margin: 15px auto 0px auto">Submit</button>
+              </div>
+
+              <div *ngIf="!enableSubmit">
+                  <button class="btn btn-primary" style="display:block; margin: 15px auto 0px auto" disabled>Submit</button>
+              </div>
+              
           </div>
+          </div>
+
+         
+
+
           <div class="col-lg-4">
             <img style="width: 100%" src="../../images/yello-logo.png">
 
@@ -79,6 +134,10 @@
     </div>
 
     </div>
+
+
+
+
   </div>
 
 

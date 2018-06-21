@@ -25,7 +25,7 @@ export const ROUTES: Routes = [
     {path: 'learn', component: AboutComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'fund', component: FundComponent},
-    {path: 'signup', component: SignupComponent},
+  //  {path: 'signup', component: SignupComponent},
     {path: 'rewards', component: RewardsComponent},
 
 

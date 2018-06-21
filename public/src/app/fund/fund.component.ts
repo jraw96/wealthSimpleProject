@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from "../services/account.service"
-import { FormsModule } from '@angular/forms';
+
 
 // TODO: make confirmation message after a successful deposit
 

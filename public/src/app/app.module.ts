@@ -21,6 +21,7 @@ import { ActivityComponent } from './activity/activity.component'
 // Services
 import { AccessTokenService } from "./services/access-token.service";
 import { AccountService } from "./services/account.service";
+import { RouterObserverService } from "./services/router-observer.service"
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { AccountService } from "./services/account.service";
         ROUTING
     ],
     providers: [AccessTokenService, 
-                AccountService
+                AccountService,
+                RouterObserverService
     ],
     bootstrap: [AppComponent]
 })

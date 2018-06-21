@@ -31,6 +31,8 @@ export class ActivityComponent implements OnInit {
     this.accountService.getAllAccounts().subscribe(data =>{
       console.log("The data: " + JSON.stringify(data))
       var accounts = data["accounts"]["results"] //this.response["results"]
+      this.mongoAccounts = data["mongoHistory"]["depositHistory"]
+      
       this.amountList = []
    
       // Create an array to select accounts
@@ -60,8 +62,7 @@ export class ActivityComponent implements OnInit {
     
 
         this.amountList.push(obj)
-      
-        console.log("Test: " + this.selectAccounts[i]["active"])
+
       }
 
       
@@ -237,6 +238,7 @@ export class ActivityComponent implements OnInit {
         this.selectMongoAccounts = []
       }
       this.toggle = false
+      this.noDepositsMessage = ""
     }
 
     this.check4Deposits()

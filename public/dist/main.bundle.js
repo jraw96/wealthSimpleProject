@@ -600,7 +600,7 @@ exports.ROUTING = router_1.RouterModule.forRoot(exports.ROUTES);
 /***/ "../../../../../src/app/fund/fund.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h3>Add Savings</h3>\n<div class=\"row\">\n\n  <div class=\"col-lg-5\">\n      <form class=\"deposit-form\">\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>From</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\" (change)=\"setAccount($event.target.value)\">\n                           \n                            <option *ngFor=\"let account of amountList; let i = index\" [value]=\"i\">\n                              {{account[\"type\"]}}\n\n                              {{account[\"nickname\"]}}\n                              (${{account[\"amount\"]}} )\n                            </option>\n                                  \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>To</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                        <option *ngFor=\"let pot of jackpotList\">\n                          {{pot[\"account\"]}} \n                          ($ {{pot[\"amount\"]}}) \n                        \n                        </option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Amount <!-- <br> <i>Max: {{currentMax}}</i> --> </label>\n            \n\n                  <input type=\"text\"  [(ngModel)]=\"enteredAmount\" name=\"first\" id=\"formFields_6\" placeholder=\"$\" (keyup)=\"enterAmount()\">\n\n\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Schedule</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>Just Once</option>\n                          <option>Monthly</option>\n                   \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <!--\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Deposit Date</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n        -->\n\n      </form>\n\n      <div *ngIf=\"!enableDeposit\">\n          <button class=\"btn btn-primary\" disabled>Submit Deposit</button>\n      </div>\n      <div *ngIf=\"enableDeposit\">\n          <button class=\"btn btn-primary\" (click)=\"submitDeposit()\">Submit Deposit</button>\n      </div>\n      \n\n  </div>\n\n  <div class=\"col-lg-7\">\n\n \n    \n    </div>\n</div>\n</div>"
+module.exports = "<div class=\"container\">\n  <h3>Add Savings</h3>\n<div class=\"row\">\n\n  <div class=\"col-lg-5\">\n      <form class=\"deposit-form\">\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>From</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\" (change)=\"setAccount($event.target.value)\">\n                           <option>Select Account</option>\n\n                            <option *ngFor=\"let account of amountList; let i = index\" [value]=\"i\">\n                            \n\n                              {{account[\"nickname\"]}}\n                              (${{account[\"amount\"]}} )\n                            </option>\n                                  \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>To</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                        <option *ngFor=\"let pot of jackpotList\">\n                          {{pot[\"account\"]}} \n                          ($ {{pot[\"amount\"]}}) \n                        \n                        </option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Amount <!-- <br> <i>Max: {{currentMax}}</i> --> </label>\n            \n\n                  <input type=\"text\"  [(ngModel)]=\"enteredAmount\" name=\"first\" id=\"formFields_6\" placeholder=\"$\" (keyup)=\"enterAmount()\">\n\n\n              </div>\n          </section>\n\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Schedule</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>Just Once</option>\n                        <!--  <option>Monthly</option> -->\n                   \n                      </select>\n                  </div>\n              </div>\n          </section>\n\n          <!--\n          <section class=\"form-block\">\n              <div class=\"form-group\">\n                  <label>Deposit Date</label>\n\n                  <div class=\"select\" style=\"min-width: 6.5rem\">\n                      <select id=\"exampleSelect1\">\n                          <option>MB</option>\n                          <option>GB</option>\n                          <option>TB</option>\n                      </select>\n                  </div>\n              </div>\n          </section>\n        -->\n\n      </form>\n\n     \n      \n\n  </div>\n\n  <div class=\"col-lg-7\">\n\n      <div class=\"row\" style=\"margin-top: 0%\">\n      \n              <div class=\"card\" style=\"display:block; margin-left: auto; margin-right: auto; max-width: 400px\">\n                  <div class=\"card-header\">\n                      Deposit Submission Form\n                  </div>\n                  <div class=\"card-block\">\n                      <div class=\"card-title\">\n                          Account Selected: {{selectedFromAccount}}\n                      </div>\n                      <div class=\"card-text\">\n                          Amount: ${{enteredAmount}}  <br>\n                          To: Jackpot <br>\n                          Schedule: Just Once\n\n                      </div>\n                  </div>\n                  <div class=\"card-footer\">\n                      <button class=\"btn btn-sm btn-link\">Clear</button>\n                    \n                  </div>\n              </div>\n          \n      </div>\n\n      <div *ngIf=\"!enableDeposit\">\n          <button class=\"btn btn-primary\" style=\"display:block; margin-left: auto; margin-right: auto; margin-top: 30px\" disabled>Submit Deposit To Jackpot</button>\n      </div>\n      <div *ngIf=\"enableDeposit\">\n          <button class=\"btn btn-primary\" (click)=\"submitDeposit()\" style=\"display:block; margin-left: auto; margin-right: auto; margin-top: 30px\">Submit Deposit To Jackpot</button>\n      </div>\n\n      <h6 align=\"center\"> {{statusMessage}}</h6>\n \n    \n    </div>\n</div>\n</div>"
 
 /***/ }),
 
@@ -640,6 +640,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 // TODO: make confirmation message after a successful deposit
+// TODO: Subtract amounts avaible in each account in the drop down
 var FundComponent = /** @class */ (function () {
     function FundComponent(accountService) {
         this.accountService = accountService;
@@ -648,7 +649,10 @@ var FundComponent = /** @class */ (function () {
         this.accountIndex = 0;
         this.currentMax = 0;
         this.enableDeposit = false;
+        this.enableDesosit2 = false;
         this.enteredAmount = "";
+        this.selectedFromAccount = "";
+        this.statusMessage = "";
         this.jackpotList = [];
     }
     FundComponent.prototype.ngOnInit = function () {
@@ -656,7 +660,7 @@ var FundComponent = /** @class */ (function () {
         var _this = this;
         this.accountService.getAllAccounts().subscribe(function (data) {
             console.log("Holy shit i got this: " + JSON.stringify(data));
-            var accounts = _this.response["results"];
+            var accounts = data["accounts"]["results"];
             _this.amountList = [];
             // Create an array to select accounts
             for (var i = 0; i <= accounts.length - 1; i++) {
@@ -665,21 +669,26 @@ var FundComponent = /** @class */ (function () {
                 obj["id"] = accounts[i]["id"];
                 // Assuming there is one owners object
                 if (accounts[i]["owners"][0]["account_nickname"]) {
-                    obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"];
+                    obj["nickname"] = accounts[i]["owners"][0]["account_nickname"];
                 }
                 else {
                     obj["nickname"] = "";
                 }
                 obj["amount"] = accounts[i]["net_liquidation"]["amount"];
                 obj["currency"] = accounts[i]["net_liquidation"]["currency"];
-                _this.amountList.push(obj);
+                // Do not put in the ws-jackpot account
+                console.log("Checking this account: " + obj["nickname"]);
+                if (obj["nickname"] != " - ws-jackpot") {
+                    console.log("Skipped the jackpot account");
+                    _this.amountList.push(obj);
+                }
             }
             console.log("Here is the amoutlist: " + JSON.stringify(_this.amountList));
             // Insert the current jackpot amount
             _this.jackpotList = [];
             // There is only one jackpot amount, and its hard coded
             var temp = {};
-            temp["amount"] = 14355;
+            temp["amount"] = 1500000;
             temp["account"] = "Jackpot";
             _this.jackpotList.push(temp);
             _this.getMaxAmount();
@@ -690,31 +699,53 @@ var FundComponent = /** @class */ (function () {
     FundComponent.prototype.getMaxAmount = function () {
         var max = this.amountList[this.accountIndex];
         this.currentMax = max["amount"];
+        console.log("Here is the selected account: " + JSON.stringify(this.amountList[this.accountIndex]));
         console.log("Proposing this max amount: " + max["amount"]);
+        console.log("COmparing: " + this.enteredAmount + " and " + this.currentMax);
+        if (Number(this.enteredAmount) < this.currentMax && this.enteredAmount != "") {
+            this.enableDeposit = true;
+        }
+        else {
+            this.enableDeposit = false;
+        }
     };
     FundComponent.prototype.setAccount = function (thing) {
-        this.accountIndex = thing;
-        this.getMaxAmount();
+        this.statusMessage = "";
+        console.log('Got this index: ' + thing);
+        if (thing != "Select Account") {
+            this.accountIndex = thing;
+            // this.selectedFromAccount = this.amountList[this.accountIndex]["nickname"]
+            console.log("I want to set this nickname: " + this.amountList[this.accountIndex]);
+            console.log("Set the account from here: " + JSON.stringify(this.amountList[thing]));
+            var name = this.amountList[thing]["nickname"];
+            this.selectedFromAccount = name;
+            this.check4Account();
+            this.getMaxAmount();
+        }
     };
     FundComponent.prototype.enterAmount = function () {
         console.log("Can I enter this amount: " + this.enteredAmount);
         var num = Number(this.enteredAmount);
         console.log("This is num: " + num);
         if (isNaN(num) || num == 0) {
-            console.log("Not a number");
+            console.log("Not a number!!!!!");
             this.enableDeposit = false;
         }
         else {
             if (num < this.currentMax) {
+                console.log("Yep, enable because: " + num + " < " + this.currentMax);
                 this.enableDeposit = true;
             }
             else {
+                console.log("Nope, enable because: " + num + " > " + this.currentMax);
                 this.enableDeposit = false;
             }
         }
+        console.log("Value of deposit2: " + this.enableDesosit2);
     };
     // Submit the deposit to the backend for processing
     FundComponent.prototype.submitDeposit = function () {
+        var _this = this;
         this.enableDeposit = false;
         var obj = {};
         obj["info"] = this.amountList[this.accountIndex];
@@ -724,9 +755,20 @@ var FundComponent = /** @class */ (function () {
         console.log("I will send this objet: " + JSON.stringify(obj));
         this.accountService.postJackpotDeposit(obj).subscribe(function (data) {
             console.log("Got this back after a successful post: " + data);
+            // SHow status message
+            _this.statusMessage = "Successfully Deposited";
         }, function (error) {
             console.log("Error sending deposit info: " + JSON.stringify(error));
+            _this.statusMessage = "Unable to deposit at this time. ";
         });
+    };
+    FundComponent.prototype.check4Account = function () {
+        if (this.selectedFromAccount != "") {
+            this.enableDesosit2 = true;
+        }
+        else {
+            this.enableDesosit2 = false;
+        }
     };
     FundComponent.prototype.getDate = function () {
         // Get the current date

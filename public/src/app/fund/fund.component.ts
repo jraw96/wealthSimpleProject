@@ -3,6 +3,7 @@ import { AccountService } from "../services/account.service"
 
 
 // TODO: make confirmation message after a successful deposit
+// TODO: Subtract amounts avaible in each account in the drop down
 
 
 @Component({
@@ -21,7 +22,11 @@ export class FundComponent implements OnInit {
   accountIndex: number = 0
   currentMax: number = 0
   enableDeposit: Boolean = false
+  enableDesosit2: Boolean = false
   enteredAmount: String = ""
+  selectedFromAccount: String = ""
+
+  statusMessage: String = ""
 
   jackpotList: any[] = []
 
@@ -32,7 +37,7 @@ export class FundComponent implements OnInit {
     this.accountService.getAllAccounts().subscribe(data =>{
       console.log("Holy shit i got this: " + JSON.stringify(data))
 
-      var accounts = this.response["results"]
+      var accounts = data["accounts"]["results"]
       this.amountList = []
    
       // Create an array to select accounts
@@ -43,7 +48,7 @@ export class FundComponent implements OnInit {
   
         // Assuming there is one owners object
         if(accounts[i]["owners"][0]["account_nickname"]){
-          obj["nickname"] = " - " + accounts[i]["owners"][0]["account_nickname"]
+          obj["nickname"] = accounts[i]["owners"][0]["account_nickname"]
         }else{
           obj["nickname"] = ""
         }
@@ -51,8 +56,13 @@ export class FundComponent implements OnInit {
         obj["amount"] = accounts[i]["net_liquidation"]["amount"]
         obj["currency"] = accounts[i]["net_liquidation"]["currency"]
   
+        // Do not put in the ws-jackpot account
+        console.log("Checking this account: " + obj["nickname"])
+        if(obj["nickname"] != " - ws-jackpot"){
+          console.log("Skipped the jackpot account")
+          this.amountList.push(obj)
+        }
         
-        this.amountList.push(obj)
       
       }
   
@@ -64,7 +74,7 @@ export class FundComponent implements OnInit {
   
       // There is only one jackpot amount, and its hard coded
       var temp = {}
-      temp["amount"] = 14355
+      temp["amount"] = 1500000
       temp["account"] = "Jackpot"
   
       this.jackpotList.push(temp)
@@ -84,13 +94,37 @@ export class FundComponent implements OnInit {
     var max = this.amountList[this.accountIndex]
     this.currentMax = max["amount"]
 
+    console.log("Here is the selected account: " + JSON.stringify(this.amountList[this.accountIndex]))
     console.log("Proposing this max amount: " + max["amount"])
+
+    console.log("COmparing: " + this.enteredAmount + " and " + this.currentMax)
+    if(Number(this.enteredAmount) < this.currentMax && this.enteredAmount != ""){
+      this.enableDeposit = true
+    }else{
+      this.enableDeposit = false
+    }
     
   }
 
   setAccount(thing){
-    this.accountIndex = thing
+    this.statusMessage = ""
+    console.log('Got this index: ' + thing)
+    if(thing != "Select Account"){
+    this.accountIndex = thing 
+
+   // this.selectedFromAccount = this.amountList[this.accountIndex]["nickname"]
+   console.log("I want to set this nickname: " + this.amountList[this.accountIndex])
+    console.log("Set the account from here: " + JSON.stringify(this.amountList[thing]))
+    var name = this.amountList[thing]["nickname"]
+    this.selectedFromAccount = name
+
+
+    this.check4Account()
+
     this.getMaxAmount()
+
+
+    }
   }
 
   enterAmount(){
@@ -100,16 +134,21 @@ export class FundComponent implements OnInit {
     console.log("This is num: " + num)
 
     if(isNaN(num) || num == 0){
-      console.log("Not a number")
+      console.log("Not a number!!!!!")
       this.enableDeposit = false
     }else{
       if(num < this.currentMax){
+        console.log("Yep, enable because: " + num + " < " + this.currentMax)
         this.enableDeposit = true
       }else{
+        console.log("Nope, enable because: " + num + " > " + this.currentMax)
         this.enableDeposit = false
       }
      
     }
+
+    console.log("Value of deposit2: " + this.enableDesosit2)
+    
   }
 
   // Submit the deposit to the backend for processing
@@ -128,11 +167,23 @@ export class FundComponent implements OnInit {
 
     this.accountService.postJackpotDeposit(obj).subscribe(data =>{
       console.log("Got this back after a successful post: " + data)
+
+      // SHow status message
+      this.statusMessage = "Successfully Deposited!"
       
     }, error => {
       console.log("Error sending deposit info: " + JSON.stringify(error))
+      this.statusMessage = "Unable to deposit at this time. "
     })
     
+  }
+
+  check4Account(){
+    if(this.selectedFromAccount != ""){
+      this.enableDesosit2 = true
+    }else{
+      this.enableDesosit2 = false
+    }
   }
 
   getDate(){

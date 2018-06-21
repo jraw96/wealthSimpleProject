@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
         }, error =>{
             // If there is a 4.x error, it means the current session is not authenticated. 
             // Set the webpage to display the non-authentiected view
-            this.loggedIn = false // UNDO
+            this.loggedIn = true//false // UNDO
         })
         
     }

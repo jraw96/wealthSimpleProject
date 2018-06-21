@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_lazy_route_resource lazy re
 /***/ "../../../../../src/app/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\nLearn about stuff here\r\n"
+module.exports = "<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-7\">\r\n            <h1>What is <b>Jackpot?</b></h1>\r\n            <p>\r\n                Wealthsimple's Jackpot products are an innovative way to help you save,\r\n                linking the fun and excitement of winning a lottery to savings.\r\n            </p>\r\n            <p>\r\n                It's a win-win for YOU - you set some money aside into our special savings\r\n                account, and earn chances to win prizes. While there are many prize winners, \r\n                those who don't win a prize are winners too because they walk away with the\r\n                savings they set aside.  \r\n            </p>\r\n            <p>Jackpot is an exciting way to potentially win the lottery, without any risk!</p><br>\r\n\r\n            <h1>Who are we?</h1>\r\n\r\n            <p>\r\n                Jackpot is backed by a team of world-class financial experts and Silicon Valley's\r\n                best technology talent. We've raised $165 million in capital from the Power Financial \r\n                Group, a leading financial holding company with $1.4 trillion in assets under administration.\r\n            </p>\r\n\r\n            <p>\r\n                Our talented team of software engineers, designers and data scientists have previously worked at such \r\n                as Amazon, Google and Apple. \r\n            </p>\r\n\r\n\r\n        </div>\r\n        <div class=\"col-lg-5\">\r\n           \r\n                <h1 style=\"font-size:60px; margin-top: 38%; margin-bottom: 35px\" align=\"center\" >$2,000,000,000</h1>\r\n                <p style=\"text-align: center; font-size: 25px; margin-bottom: 15px\">\r\n                    currently held with Wealthsimple companies\r\n                </p>\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-12>\" style=\"padding-top: 15px\">\r\n                        <div align=\"center\">\r\n                          <img style=\"width: 25%\" src=\"../../../images/Trophy-icon.png\">\r\n              \r\n\r\n                  \r\n                            <img style=\"width: 35%\" src=\"../../../images/big-trophy.png\">\r\n                \r\n\r\n                    \r\n                            <img style=\"width: 25%\" src=\"../../../images/Trophy-icon.png\">\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n       \r\n            \r\n        </div>\r\n    </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -32,7 +32,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".custom-center {\n  display: block;\n  margin-left: auto;\n  margin-right: auto; }\n", ""]);
 
 // exports
 
@@ -390,7 +390,7 @@ var AppComponent = (function () {
         }, function (error) {
             // If there is a 4.x error, it means the current session is not authenticated. 
             // Set the webpage to display the non-authentiected view
-            _this.loggedIn = false; // UNDO
+            _this.loggedIn = true; //false // UNDO
         });
     };
     AppComponent.prototype.ngOnDestroy = function () {

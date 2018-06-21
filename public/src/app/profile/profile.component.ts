@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from "../services/account.service"
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
+
+  person: any = {}
 
   ngOnInit() {
+
+    this.person = (this.accountService.getPersonInfo())//["results"][0]
+    console.log("Value of this person: " + JSON.stringify(this.person))
+
   }
+
+
+
 
 }

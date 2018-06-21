@@ -1,3 +1,30 @@
-<p>
-  profile works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="cosy" style="  padding-left: 30px;  background-color: #F2F2F2;
+      padding: 1px 10px 15px 15px;
+      margin: 10px 0px 10px 10px;
+      border-radius: 5px">
+        <h3 style="margin-bottom: 10px"><b>Preffered name: </b></h3> <span class="mySpan">{{person["preferred_first_name"]}}</span>
+
+        <h3 style="margin-bottom: 10px"><b>Email: </b></h3> <span class="mySpan">{{person["email"]}}</span>
+
+        <h3 style="margin-bottom: 10px"><b>First Name: </b></h3> <span class="mySpan">{{person["full_legal_name"]["first_name"]}}</span>
+
+        <h3 style="margin-bottom: 10px"><b>Last Name: </b></h3> <span class="mySpan">{{person["full_legal_name"]["last_name"]}}</span>
+
+        <h3 style="margin-bottom: 10px"><b>Phone Number: </b></h3> <span class="mySpan">{{person["phone_numbers"][0]["number"]}}</span>
+
+        <button style="float: right; margin-top: -15px" class="btn btn-success-outline">Edit</button>
+
+      </div>
+
+    </div>
+    <div class="col-lg-4">
+      <h3 style="margin-top: 17%; margin-bottom: 10px" align="center">Active Profile Pic</h3>
+      <img  style="border-radius: 6px; display: block; margin-left: auto; margin-right: auto"  src="../../../images/ironman.jpg">
+      </div>
+
+     
+  </div>
+</div>

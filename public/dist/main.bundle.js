@@ -809,32 +809,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
- * Copyright (c) 2016 VMware, Inc. All Rights Reserved.
- * This software is released under MIT license.
- * The full license information can be found in LICENSE in the root directory of this project.
- */
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
 // Services 
 var access_token_service_1 = __webpack_require__("../../../../../src/app/services/access-token.service.ts");
+var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 var HomeComponent = (function () {
-    function HomeComponent(accessToken) {
+    function HomeComponent(accessToken, accountService) {
         this.accessToken = accessToken;
-        this.user = "jake";
+        this.accountService = accountService;
+        this.user = "";
         this.nextDraw = "Friday, June 22nd";
         this.entries = 33;
         this.jackpot = 1500000;
         this.totalInvestmentAmount = "$7502";
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         console.log("We loaded to home");
+        this.accountService.getPerson().subscribe(function (data) {
+            console.log("Got this: " + JSON.stringify(data));
+            // Assume there is one person result that comes back
+            var person = {};
+            person = data["results"][0];
+            _this.user = person["preferred_first_name"];
+            _this.accountService.setPersonInfo(person);
+        }, function (error) {
+            console.log('Error getting person information');
+            var data = "";
+            data = "{\n                \"object\": \"person\",\n                \"offset\": 0,\n                \"total_count\": 1,\n                \"results\": [\n                    {\n                        \"id\": \"person-ephr7kgw-qwxww\",\n                        \"user_id\": \"user-APE2fikk71w\",\n                        \"object\": \"person\",\n                        \"email\": \"hackthesix+user8@wealthsimple.com\",\n                        \"preferred_first_name\": \"Given8\",\n                        \"gender\": \"male\",\n                        \"date_of_birth\": \"1945-05-18\",\n                        \"country_of_birth\": null,\n                        \"locale\": \"en-CA\",\n                        \"external_id\": null,\n                        \"jurisdictions\": [\n                            \"CA\"\n                        ],\n                        \"citizenships\": [\n                            \"CA\"\n                        ],\n                        \"marital_status\": null,\n                        \"full_legal_name\": {\n                            \"first_name\": \"Dawn Rutledge\",\n                            \"middle_names\": null,\n                            \"last_name\": \"Maldonado\"\n                        },\n                        \"residential_address\": {\n                            \"unit\": null,\n                            \"street_number\": \"123\",\n                            \"street_name\": \"Queen Street West\",\n                            \"city\": \"Toronto\",\n                            \"province_state_region\": \"ON\",\n                            \"postal_code\": \"M5H3M9\",\n                            \"country\": \"CA\"\n                        },\n                        \"mailing_address\": {\n                            \"unit\": null,\n                            \"street_number\": \"123\",\n                            \"street_name\": \"Queen Street West\",\n                            \"city\": \"Toronto\",\n                            \"province_state_region\": \"ON\",\n                            \"postal_code\": \"M5H3M9\",\n                            \"country\": \"CA\"\n                        },\n                        \"employment\": {\n                            \"status\": \"unemployed\"\n                        },\n                        \"phone_numbers\": [\n                            {\n                                \"primary\": true,\n                                \"country_code\": \"1\",\n                                \"number\": \"5493928778\",\n                                \"type\": \"home\"\n                            }\n                        ],\n                        \"insiders\": [],\n                        \"tax_identification_numbers\": [\n                            {\n                                \"type\": \"ca_sin_itn\",\n                                \"number\": \"*****0020\"\n                            }\n                        ],\n                        \"regulated_people\": [],\n                        \"politically_exposed_people\": [],\n                        \"dependents\": [],\n                        \"created_at\": \"2018-05-29T18:55:15Z\",\n                        \"updated_at\": \"2018-05-29T18:57:15Z\"\n                    }\n                ]\n            }";
+            var person = {};
+            //  console.log("Test: " + JSON.stringify(data["results"]))
+            person = JSON.parse(data)["results"][0];
+            _this.user = person["preferred_first_name"];
+            _this.accountService.setPersonInfo(person);
+        });
     };
     HomeComponent = __decorate([
         core_1.Component({
             styles: [__webpack_require__("../../../../../src/app/home/home.component.scss")],
             template: __webpack_require__("../../../../../src/app/home/home.component.html"),
         }),
-        __metadata("design:paramtypes", [access_token_service_1.AccessTokenService])
+        __metadata("design:paramtypes", [access_token_service_1.AccessTokenService,
+            account_service_1.AccountService])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -861,7 +877,7 @@ __export(__webpack_require__("../../../../../src/app/app.module.ts"));
 /***/ "../../../../../src/app/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  profile works!\r\n</p>\r\n"
+module.exports = "<div class=\"container\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8\">\r\n      <div class=\"cosy\" style=\"  padding-left: 30px;  background-color: #F2F2F2;\r\n      padding: 1px 10px 15px 15px;\r\n      margin: 10px 0px 10px 10px;\r\n      border-radius: 5px\">\r\n        <h3 style=\"margin-bottom: 10px\"><b>Preffered name: </b></h3> <span class=\"mySpan\">{{person[\"preferred_first_name\"]}}</span>\r\n\r\n        <h3 style=\"margin-bottom: 10px\"><b>Email: </b></h3> <span class=\"mySpan\">{{person[\"email\"]}}</span>\r\n\r\n        <h3 style=\"margin-bottom: 10px\"><b>First Name: </b></h3> <span class=\"mySpan\">{{person[\"full_legal_name\"][\"first_name\"]}}</span>\r\n\r\n        <h3 style=\"margin-bottom: 10px\"><b>Last Name: </b></h3> <span class=\"mySpan\">{{person[\"full_legal_name\"][\"last_name\"]}}</span>\r\n\r\n        <h3 style=\"margin-bottom: 10px\"><b>Phone Number: </b></h3> <span class=\"mySpan\">{{person[\"phone_numbers\"][0][\"number\"]}}</span>\r\n\r\n        <button style=\"float: right; margin-top: -15px\" class=\"btn btn-success-outline\">Edit</button>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-4\">\r\n      <h3 style=\"margin-top: 17%; margin-bottom: 10px\" align=\"center\">Active Profile Pic</h3>\r\n      <img  style=\"border-radius: 6px; display: block; margin-left: auto; margin-right: auto\"  src=\"../../../images/ironman.jpg\">\r\n      </div>\r\n\r\n     \r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -873,7 +889,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, ".cozy {\n  padding-left: 30px;\n  padding-bottom: 1px;\n  margin: 10px 0px 10px 10px;\n  border-radius: 5px; }\n\n.mySpan {\n  font-size: 18px;\n  margin-top: 7px; }\n", ""]);
 
 // exports
 
@@ -899,10 +915,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/esm5/core.js");
+var account_service_1 = __webpack_require__("../../../../../src/app/services/account.service.ts");
 var ProfileComponent = (function () {
-    function ProfileComponent() {
+    function ProfileComponent(accountService) {
+        this.accountService = accountService;
+        this.person = {};
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.person = (this.accountService.getPersonInfo()); //["results"][0]
+        console.log("Value of this person: " + JSON.stringify(this.person));
     };
     ProfileComponent = __decorate([
         core_1.Component({
@@ -910,7 +931,7 @@ var ProfileComponent = (function () {
             template: __webpack_require__("../../../../../src/app/profile/profile.component.html"),
             styles: [__webpack_require__("../../../../../src/app/profile/profile.component.scss")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [account_service_1.AccountService])
     ], ProfileComponent);
     return ProfileComponent;
 }());
@@ -1040,12 +1061,18 @@ var AccountService = (function () {
     function AccountService(http) {
         this.http = http;
         this.user = "loading...";
+        this.person = {};
     }
+    // Get all accounts for a user
     AccountService.prototype.getAllAccounts = function () {
         return this.http.get('http://localhost:3000/api/getAllAccounts');
     };
+    // Save in the mongo db the record for making a deposit into the jackpot account
     AccountService.prototype.postJackpotDeposit = function (postObj) {
         return this.http.post('http://localhost:3000/api/postJackpotDeposit', postObj);
+    };
+    AccountService.prototype.getPerson = function () {
+        return this.http.get('http://localhost:3000/api/getPerson');
     };
     // Setter for the logged in user
     AccountService.prototype.setUser = function (user) {
@@ -1053,6 +1080,13 @@ var AccountService = (function () {
     };
     AccountService.prototype.getUser = function () {
         return this.user;
+    };
+    // Setter and Getter for the Wealthsimple Person record
+    AccountService.prototype.setPersonInfo = function (person) {
+        this.person = person;
+    };
+    AccountService.prototype.getPersonInfo = function () {
+        return this.person;
     };
     AccountService = __decorate([
         core_1.Injectable(),

@@ -293,13 +293,40 @@ function updateJackpot(updateObj, userInfo){
     
 
     // Deposit the money into the 
+    }
+
 }
 
+// Get the person information associated with the account
+ctr.getPerson = function(req, res){
 
 
+    var options = { 
+ method: 'GET',
+  url: 'https://api.sandbox.wealthsimple.com/v1/people',
+  qs: { 
+      "client_id":  req.userInfo["person"]
+},
+  headers: 
+   { 
+     Authorization: 'Bearer ' +  req.userInfo["access_token"],
+   
+    },
+    json: true 
+};
 
+    console.log("The options: " + JSON.stringify(options))
 
-
+request(options, function (error, response, body) {
+    if(error){
+        console.log('Error getting account information: ' + JSON.stringify(error))
+        res.send(error)
+    }else{
+        console.log("The success body; " + JSON.stringify(body))
+        res.status(200)
+        res.send(body)
+    }
+});
 
 }
 
